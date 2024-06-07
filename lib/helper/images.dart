@@ -12,4 +12,21 @@ class AppIcons{
   static const ic_down_arrow = "assets/icons/ic_down_arrow.webp";
   static const ic_menu = "assets/icons/ic_menu.webp";
   static const ic_notification = "assets/icons/ic_notification.webp";
+  static const ic_chat = "assets/icons/ic_chat.webp";
+  static const ic_favourite = "assets/icons/ic_favourite.webp";
+  static const ic_add = "assets/icons/ic_add.webp";
+  static const ic_arrow = "assets/icons/ic_arrow.png";
+  static const ic_setting = "assets/icons/ic_setting.webp";
+  static const ic_type = "assets/icons/ic_type.webp";
+  static const ic_location = "assets/icons/ic_location.webp";
+  static const ic_clock = "assets/icons/ic_clock.webp";
+  static const ic_calender = "assets/icons/ic_calender.webp";
+  static const ic_arrow_forward = "assets/icons/ic_arrow_forward.webp";
+  static const ic_person = "assets/icons/ic_personn.webp";
+  static const ic_eye = "assets/icons/ic_eye.webp";
+  static const ic_bell = "assets/icons/ic_bell.webp";
+  static const ic_layers = "assets/icons/ic_layers.webp";
+  static const ic_orders = "assets/icons/ic_orders.webp";
+  static const ic_faq = "assets/icons/ic_faq.webp";
+  static const ic_logout = "assets/icons/ic_logout.webp";
 }

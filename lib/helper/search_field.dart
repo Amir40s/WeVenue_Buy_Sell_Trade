@@ -1,5 +1,5 @@
 import 'package:biouwa/helper/images.dart';
-import 'package:biouwa/provider/password_visible_provider.dart';
+import 'package:biouwa/provider/constant/password_visible_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

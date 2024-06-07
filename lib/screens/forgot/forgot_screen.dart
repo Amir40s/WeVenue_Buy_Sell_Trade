@@ -10,8 +10,8 @@ import '../../helper/custom_textfield.dart';
 import '../../helper/images.dart';
 import '../../helper/simple_header.dart';
 import '../../helper/text_widget.dart';
-import '../../provider/firebase_data_provider.dart';
-import '../../provider/value_provider.dart';
+import '../../provider/signnup/firebase_data_provider.dart';
+import '../../provider/constant/value_provider.dart';
 class ForgotPasswordScreen extends StatelessWidget {
    ForgotPasswordScreen({super.key});
 

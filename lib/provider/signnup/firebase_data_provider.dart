@@ -1,5 +1,5 @@
 import 'package:biouwa/db_key.dart';
-import 'package:biouwa/provider/value_provider.dart';
+import 'package:biouwa/provider/constant/value_provider.dart';
 import 'package:biouwa/screens/dashboard/dashboard_screen.dart';
 import 'package:biouwa/screens/login/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../constant.dart';
+import '../../constant.dart';
+import '../../constant/appString/app_string.dart';
+import '../../screens/bottom_bar/bottom_bar_screen.dart';
+
 
 class FirebaseDataProvider extends ChangeNotifier{
 
@@ -56,6 +59,8 @@ class FirebaseDataProvider extends ChangeNotifier{
           DbKey.k_phone : phone,
           DbKey.k_userType : accountType,
           DbKey.k_password : password,
+          DbKey.k_address : "",
+          DbKey.k_image : AppString.imagePath,
           DbKey.k_date : "${time.day}/${time.month}/${time.year}",
           DbKey.k_time : "${time.hour}:${time.minute}",
           DbKey.k_timestamp : time.millisecondsSinceEpoch,
@@ -76,17 +81,18 @@ class FirebaseDataProvider extends ChangeNotifier{
   Future<void> signInWithGoogle({required email,required password,required BuildContext context}) async{
   //  final provider = Provider.of<SharedPreferenceProvider>(context,listen: false);
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+    final user =   await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password
-      ).whenComplete(() {
-        // final userUID =  FirebaseAuth.instance.currentUser?.uid;
-        // if(userUID!=null){
-        //   fetchData(userUID,context,provider);
-        // }
-        Get.to(()=>DashboardScreen());
+      );
+      if(user !=null){
+        Provider.of<ValueProvider>(context,listen: false).setLoading(false);
+        Get.to(()=> const BottomNavBar());
+      }else{
+        Provider.of<ValueProvider>(context,listen: false).setLoading(false);
+        Get.snackbar("Error", "Something went wrong");
+      }
 
-      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         Provider.of<ValueProvider>(context,listen: false).setLoading(false);

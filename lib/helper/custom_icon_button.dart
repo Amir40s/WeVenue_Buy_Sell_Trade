@@ -12,10 +12,10 @@ class CustomIconsButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
-        border: Border.all(
-          color: Colors.black,
-          width: 1.0,
-        )
+        // border: Border.all(
+        //   color: Colors.black,
+        //   width: 1.0,
+        // )
       ),
       child: Image.asset(iconPath,width: 23.0,height: 23.0,),
     );

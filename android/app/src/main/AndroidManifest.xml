@@ -1,4 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
+    <!-- Add this line if your targetSdkVersion is 29 or higher -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" android:required="false"/>
+
+    <!-- Other configurations -->
+
     <application
         android:label="biouwa"
         android:name="${applicationName}"

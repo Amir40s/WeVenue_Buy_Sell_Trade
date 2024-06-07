@@ -1,7 +1,14 @@
 import 'package:biouwa/helper/dropdown_provider.dart';
-import 'package:biouwa/provider/firebase_data_provider.dart';
-import 'package:biouwa/provider/password_visible_provider.dart';
-import 'package:biouwa/provider/value_provider.dart';
+import 'package:biouwa/provider/account/account_provider.dart';
+import 'package:biouwa/provider/bottom_bar/bottom_bar_provider.dart';
+import 'package:biouwa/provider/cart/cart_provider.dart';
+import 'package:biouwa/provider/constant/password_visible_provider.dart';
+import 'package:biouwa/provider/constant/value_provider.dart';
+import 'package:biouwa/provider/data/image_provider.dart';
+import 'package:biouwa/provider/items/faq_provider.dart';
+import 'package:biouwa/provider/items/items_upload_provider.dart';
+import 'package:biouwa/provider/products/products_provider.dart';
+import 'package:biouwa/provider/signnup/firebase_data_provider.dart';
 import 'package:biouwa/start/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +35,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DropdownProvider()),
         ChangeNotifierProvider(create: (_) => ValueProvider()),
         ChangeNotifierProvider(create: (_) => FirebaseDataProvider()),
+        ChangeNotifierProvider(create: (_) => BottomBarProvider()),
+        ChangeNotifierProvider(create: (_) => AccountProvider()),
+        ChangeNotifierProvider(create: (_) => ImagePickProvider()),
+        ChangeNotifierProvider(create: (_) => ItemsUploadProvider()),
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => FAQProvider()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
@@ -36,7 +50,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

@@ -3,7 +3,8 @@ import 'package:biouwa/helper/bordder_button_widget.dart';
 import 'package:biouwa/helper/button_widget.dart';
 import 'package:biouwa/helper/images.dart';
 import 'package:biouwa/helper/text_widget.dart';
-import 'package:biouwa/screens/dashboard/menu/move_services.dart';
+import 'package:biouwa/screens/dashboard/menu/moveServices/move_services.dart';
+import 'package:biouwa/screens/dashboard/menu/myListing/my_listing_screen.dart';
 import 'package:biouwa/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -58,7 +59,10 @@ class MenuScreen extends StatelessWidget {
 
                    SizedBox(height: 20.0,),
                    CustomListTile(
-                     press: () {  },
+                     press: () {
+                       print("press");
+                       Get.to(()=> MyListingScreen());
+                     },
                      icon: AppIcons.ic_name,
                      title: "My Listings", subtitle: "view your product listing for sale",
                    ),

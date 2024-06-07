@@ -5,7 +5,7 @@ import 'package:biouwa/helper/custom_textfield.dart';
 import 'package:biouwa/helper/images.dart';
 import 'package:biouwa/helper/simple_header.dart';
 import 'package:biouwa/helper/text_widget.dart';
-import 'package:biouwa/provider/firebase_data_provider.dart';
+import 'package:biouwa/provider/signnup/firebase_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +14,7 @@ import '../../helper/button_loading_widget.dart';
 import '../../helper/custom_password_textfield.dart';
 import '../../helper/dropdown_provider.dart';
 import '../../helper/dropdown_widget.dart';
-import '../../provider/value_provider.dart';
+import '../../provider/constant/value_provider.dart';
 import '../login/login_screen.dart';
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});

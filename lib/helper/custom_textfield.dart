@@ -1,20 +1,26 @@
 import 'package:biouwa/helper/images.dart';
-import 'package:biouwa/provider/password_visible_provider.dart';
+import 'package:biouwa/provider/constant/password_visible_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../constant.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   bool isSuffix = false;
   var suffixPath;
+  Color fillColor;
   VoidCallback? callback;
+  var keyboardType;
    CustomTextField({Key? key,
      required this.hintText,
      required this.controller,
     this.isSuffix = false,
      this.suffixPath,
-     this.callback
+     this.fillColor = customGrey,
+     this.callback,
+     this.keyboardType = TextInputType.text
    }) : super(key: key);
 
   @override
@@ -28,10 +34,11 @@ class CustomTextField extends StatelessWidget {
         }
         return null;
       },
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         hintText: hintText,
         filled: true,
-        fillColor: Colors.grey.shade300,
+        fillColor: fillColor,
         suffixIcon: GestureDetector(
           onTap: callback,
           child: Container(

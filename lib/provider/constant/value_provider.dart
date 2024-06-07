@@ -7,6 +7,9 @@ class ValueProvider extends ChangeNotifier{
   bool get isChecked => _isChecked;
   bool get isLoading => _isloading;
 
+  ValueProvider(){
+    setLoading(false);
+  }
 
   void setChecked(bool value){
     _isChecked = value;

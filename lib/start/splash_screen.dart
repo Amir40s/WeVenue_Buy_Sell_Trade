@@ -19,12 +19,9 @@ class SplashScreen extends StatelessWidget {
       Get.offAll(LoginScreen());
     });
     return Scaffold(
+      backgroundColor: darkPurple,
       body: Stack(
         children: [
-          GradientBox(
-            width: Get.width,
-            height: Get.height,
-          ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

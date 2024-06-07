@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../constant.dart';
 
 class TextWidget extends StatelessWidget {
   final String text;
@@ -11,6 +10,7 @@ class TextWidget extends StatelessWidget {
   bool isBold;
   var fontFamily,textAlignment;
   bool italic;
+  int maxLine;
 
    TextWidget(
       {
@@ -20,7 +20,8 @@ class TextWidget extends StatelessWidget {
     this.isBold = false,
     this.fontFamily = '',
     this.textAlignment = TextAlign.start,
-    this.italic = false
+    this.italic = false,
+    this.maxLine = 100
   });
 
   @override
@@ -30,6 +31,7 @@ class TextWidget extends StatelessWidget {
       softWrap: true,
      minFontSize: 11.0,
      maxFontSize: size,
+     maxLines: maxLine,
      // overflow: TextOverflow.ellipsis,
       style: TextStyle(
         color: color,

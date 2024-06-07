@@ -29,15 +29,16 @@ class ButtonLoadingWidget extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(radius),
-            gradient:  const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              stops: [0.0, 1.0],
-              colors: [
-                primaryColor,
-                lightPink,
-              ],
-            ),
+            // gradient:  const LinearGradient(
+            //   begin: Alignment.topLeft,
+            //   end: Alignment.bottomRight,
+            //   stops: [0.0, 1.0],
+            //   colors: [
+            //     primaryColor,
+            //     lightPink,
+            //   ],
+            // ),
+            color: primaryColor,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),

@@ -36,7 +36,7 @@ class BorderButtonWidget extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(radius),
               border: Border.all(color: primaryColor),
-              color: Colors.white,
+              color: Colors.transparent,
 
           ),
           child: Center(

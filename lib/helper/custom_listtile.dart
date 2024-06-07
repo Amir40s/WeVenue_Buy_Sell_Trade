@@ -13,7 +13,6 @@ class CustomListTile extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Container(
-        padding: EdgeInsets.all(15.0),
         decoration: BoxDecoration(
           color: lightGrey,
           borderRadius: BorderRadius.circular(30),
@@ -21,7 +20,6 @@ class CustomListTile extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(width: 5.0,),
           Image.asset(icon,width: 30.0,height: 30.0,),
             SizedBox(width: Get.width * 0.050,),
             Column(
@@ -29,7 +27,7 @@ class CustomListTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextWidget(text: title, size: 18.0),
-                SizedBox(height: 5.0,),
+                SizedBox(height: 2.0,),
                 TextWidget(text: subtitle, size: 12.0),
               ],
             )

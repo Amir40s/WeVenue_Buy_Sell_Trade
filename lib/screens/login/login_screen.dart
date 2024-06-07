@@ -5,8 +5,8 @@ import 'package:biouwa/helper/custom_textfield.dart';
 import 'package:biouwa/helper/images.dart';
 import 'package:biouwa/helper/simple_header.dart';
 import 'package:biouwa/helper/text_widget.dart';
-import 'package:biouwa/provider/firebase_data_provider.dart';
-import 'package:biouwa/provider/value_provider.dart';
+import 'package:biouwa/provider/signnup/firebase_data_provider.dart';
+import 'package:biouwa/provider/constant/value_provider.dart';
 import 'package:biouwa/screens/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -68,6 +68,7 @@ class LoginScreen extends StatelessWidget {
                       children: [
                   LoginRichText(press: (){}, firstText: "By sign, I accept the", secondText: "Terms of service "),
                         SizedBox(height: 40.0,),
+
                         Consumer<ValueProvider>(
                          builder: (context, provider, child){
                            return provider.isLoading == false  ? ButtonWidget(text: "Login", onClicked: (){
