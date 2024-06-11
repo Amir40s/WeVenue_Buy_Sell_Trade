@@ -74,12 +74,13 @@ class AccountProvider extends ChangeNotifier{
          DbKey.k_address : address,
          DbKey.k_image : image
        }).whenComplete((){
-         Provider.of<ValueProvider>(context).setLoading(false);
+         Provider.of<ValueProvider>(context,listen: false).setLoading(false);
          showSnackBar(title: "Profile Updated", subtitle: "");
+         fetchUserProfile();
       });
        notifyListeners();
      } catch (e) {
-       Provider.of<ValueProvider>(context).setLoading(false);
+       Provider.of<ValueProvider>(context,listen: false).setLoading(false);
        log("Error fetching account data: $e");
        if (kDebugMode) {
          print("Error fetching account data: $e");

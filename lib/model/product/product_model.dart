@@ -10,6 +10,9 @@ class ProductModel {
   final String title;
   final String userUID;
   final String docID;
+  final String name;
+  final String profile;
+  final String email;
   bool isSaved;
 
   ProductModel({
@@ -22,6 +25,9 @@ class ProductModel {
     required this.timestamp,
     required this.title,
     required this.userUID,
+    required this.name,
+    required this.profile,
+    required this.email,
     this.isSaved = false,
   });
 
@@ -36,6 +42,9 @@ class ProductModel {
       time: data['time'] ?? '',
       title: data['title'] ?? '',
       userUID: data['userUID'] ?? '',
+      name: data['name'] ?? '',
+      profile: data['profile'] ?? '',
+      email: data['email'] ?? '',
       isSaved: data['isSaved'] ?? false,
     );
   }
@@ -51,6 +60,9 @@ class ProductModel {
       'timestamp': timestamp,
       'title': title,
       'userUID': userUID,
+      'name': name,
+      'email': email,
+      'profile': profile,
       'isSaved': isSaved,
     };
   }

@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/utils.dart';
 
 import '../helper/images.dart';
+import '../screens/bottom_bar/bottom_bar_screen.dart';
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
@@ -16,7 +17,12 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 4),(){
       //Get.offAll(const ConfirmScreen());
-      Get.offAll(LoginScreen());
+      if(auth.currentUser !=null ){
+        Get.offAll(()=> const BottomNavBar());
+      }else{
+        Get.offAll(LoginScreen());
+      }
+
     });
     return Scaffold(
       backgroundColor: darkPurple,

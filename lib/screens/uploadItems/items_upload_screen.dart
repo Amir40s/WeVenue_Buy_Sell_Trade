@@ -74,25 +74,26 @@ class ItemsUploadScreen extends StatelessWidget {
                              )
                                  : Center(child: Text('No images selected')),
                            ),
-                           Container(
-                             width: Get.width,
-                             height: 50.0,
-                             padding: EdgeInsets.all(5.0),
-                             decoration: BoxDecoration(
-                               borderRadius: BorderRadius.circular(10.0),
-                               color: lightGrey,
-                             ),
-                             child: Row(
-                                 mainAxisAlignment: MainAxisAlignment.center,
-                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                 children: [
-                                   GestureDetector(
-                                       onTap: (){
-                                         imageProvider.pickImages();
-                                         log('message}');
-                                       },
-                                       child: TextWidget(text: "upload image",size: 12.0,)),
-                                 ]
+                           GestureDetector(
+                             onTap: (){
+                               imageProvider.pickImages();
+                               log('message}');
+                             },
+                             child: Container(
+                               width: Get.width,
+                               height: 50.0,
+                               padding: EdgeInsets.all(5.0),
+                               decoration: BoxDecoration(
+                                 borderRadius: BorderRadius.circular(10.0),
+                                 color: lightGrey,
+                               ),
+                               child: Row(
+                                   mainAxisAlignment: MainAxisAlignment.center,
+                                   crossAxisAlignment: CrossAxisAlignment.center,
+                                   children: [
+                                     TextWidget(text: "upload image",size: 12.0,),
+                                   ]
+                               ),
                              ),
                            ),
                          ],
@@ -112,7 +113,7 @@ class ItemsUploadScreen extends StatelessWidget {
                   CustomTextField(hintText: "Product Description", controller: descController,fillColor: Colors.white,),
 
                   SizedBox(height: 20.0,),
-                  TextWidget(text: "Delivery Cost", size: 14.0),
+                  TextWidget(text: "Delivery Cost(\$)", size: 14.0),
                   SizedBox(height: 10.0,),
                   CustomTextField(hintText: "Delivery Cost", controller: costController,fillColor: Colors.white,
                   keyboardType: TextInputType.number,),

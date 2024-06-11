@@ -2,6 +2,7 @@ import 'package:biouwa/helper/dropdown_provider.dart';
 import 'package:biouwa/provider/account/account_provider.dart';
 import 'package:biouwa/provider/bottom_bar/bottom_bar_provider.dart';
 import 'package:biouwa/provider/cart/cart_provider.dart';
+import 'package:biouwa/provider/chat/chat_provider.dart';
 import 'package:biouwa/provider/constant/password_visible_provider.dart';
 import 'package:biouwa/provider/constant/value_provider.dart';
 import 'package:biouwa/provider/data/image_provider.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => FAQProvider()),
+        ChangeNotifierProvider(create: (_) => ChatProvider()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,3 +1,4 @@
+import 'package:biouwa/screens/chat/chat_list_screen.dart';
 import 'package:biouwa/screens/dashboard/account/account_screen.dart';
 import 'package:biouwa/screens/dashboard/relocation/relocation_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +11,10 @@ class BottomBarProvider with ChangeNotifier {
   int _myIndex = 0;
   List<Widget> _myList = [
      DashboardScreen(),
-     DashboardScreen(),
+     // DashboardScreen(),
+     ChatListScreen(),
     RelocationScreen(),
-     AccountScreen(),
+     AccountScreen(type: 'bottom',),
      DashboardScreen(),
   ];
 

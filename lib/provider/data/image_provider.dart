@@ -37,6 +37,7 @@ class ImagePickProvider extends ChangeNotifier {
   pickProductImage() async {
     var imageData = await baseImagePicker();
     _imageFile = imageData;
+    notifyListeners();
   }
 
   Future<File?> baseImagePicker() async {

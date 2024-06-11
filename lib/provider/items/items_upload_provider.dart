@@ -15,7 +15,9 @@ class ItemsUploadProvider extends ChangeNotifier{
     try{
       DateTime time = DateTime.now();
       String id = time.millisecondsSinceEpoch.toString();
-     await  firestore.collection("items").doc(id).set({
+     final user =  await firestore.collection("users").doc(auth.currentUser?.uid.toString()).get();
+     if(user.exists){
+      await  firestore.collection("items").doc(id).set({
         DbKey.k_title :  title,
         DbKey.k_desc :  description,
         DbKey.k_cost :  double.parse(cost),
@@ -24,9 +26,14 @@ class ItemsUploadProvider extends ChangeNotifier{
         DbKey.k_date : "${time.day}/${time.month}/${time.year}",
         DbKey.k_time : "${time.hour}:${time.minute}",
         DbKey.k_image : downloadUrls.isNotEmpty ? downloadUrls[0].toString() : "",
+        DbKey.k_name : user.get("name").toString(),
+        "profile" : user.get("image").toString(),
+        DbKey.k_email: user.get(DbKey.k_email).toString(),
       }).whenComplete((){
-       uploadImagesLinks(downloadUrls: downloadUrls,id: id,context: context);
+        uploadImagesLinks(downloadUrls: downloadUrls,id: id,context: context);
       });
+     }
+
       notifyListeners();
     }catch(e){
       Provider.of<ValueProvider>(context,listen: false).setLoading(false);

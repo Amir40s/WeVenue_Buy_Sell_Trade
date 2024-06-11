@@ -22,6 +22,8 @@ class LoginScreen extends StatelessWidget {
   var passwordController  = TextEditingController();
    final ValueNotifier<bool> _obscurePassword = ValueNotifier<bool>(true);
 
+   final _key = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
      final firebaseProvider = Provider.of<FirebaseDataProvider>(context,listen: false);
@@ -30,64 +32,80 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           physics: NeverScrollableScrollPhysics(),
-          child: Container(
-            width: Get.width,
-            height: Get.height,
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                flex: 1,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SimpleHeader(),
-                    SizedBox(height: 40.0,),
-                    TextWidget(text: "Log In",size: 22.0,isBold: true,),
-          
-                    SizedBox(height: 40.0,),
-                    CustomTextField(hintText: "Email", controller: emailController,suffixPath: AppIcons.ic_email,),
-                    SizedBox(height: 20.0,),
-                    CustomPasswordTextField(hintText: "Password", controller: passwordController,suffixPath: AppIcons.ic_password_visible, obscurePassword: _obscurePassword,),
-                    SizedBox(height: 10.0,),
-                    GestureDetector(
-                        onTap: (){
-                          Get.to((ForgotPasswordScreen()));
-                        },
-                        child: TextWidget(text: "Forgot password?", size: 12.0,color: Colors.lightBlue,)),
-                  ],
-                )),
-          
-                Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                  LoginRichText(press: (){}, firstText: "By sign, I accept the", secondText: "Terms of service "),
-                        SizedBox(height: 40.0,),
+          child: Form(
+            key: _key,
+            child: Container(
+              width: Get.width,
+              height: Get.height,
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                  flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SimpleHeader(),
+                      SizedBox(height: 40.0,),
+                      TextWidget(text: "Log In",size: 22.0,isBold: true,),
 
-                        Consumer<ValueProvider>(
-                         builder: (context, provider, child){
-                           return provider.isLoading == false  ? ButtonWidget(text: "Login", onClicked: (){
-                             provider.setLoading(true);
-                             firebaseProvider.signInWithGoogle(email: emailController.text.toString(), password: passwordController.text.toString(), context: context);
-                           }, width: Get.width, height: 50.0) :
-                           ButtonLoadingWidget(loadingMesasge: "login",width: MediaQuery.sizeOf(context).width, height: 50.0);
-                         },
-                        ),
+                      SizedBox(height: 40.0,),
+                      CustomTextField(hintText: "Email", controller: emailController,suffixPath: AppIcons.ic_email,),
+                      SizedBox(height: 20.0,),
+                      CustomPasswordTextField(hintText: "Password", controller: passwordController,suffixPath: AppIcons.ic_password_visible, obscurePassword: _obscurePassword,),
+                      SizedBox(height: 10.0,),
+                      GestureDetector(
+                          onTap: (){
+                            Get.to((ForgotPasswordScreen()));
+                          },
+                          child: TextWidget(text: "Forgot password?", size: 12.0,color: Colors.lightBlue,)),
+                    ],
+                  )),
 
-                        SizedBox(height: 30.0,),
-                        CustomRichtext(press: (){
-                          Get.to(SignupScreen());
-                        }, firstText: "Don't have an account?", secondText: "Create One")
-                ],)),
-          
-          
-          
-              ],
+                  Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                    LoginRichText(press: (){}, firstText: "By sign, I accept the", secondText: "Terms of service "),
+                          SizedBox(height: 40.0,),
+
+                          Consumer<ValueProvider>(
+                           builder: (context, provider, child){
+                             return provider.isLoading == false  ? ButtonWidget(text: "Login", onClicked: (){
+                               if(_key.currentState!.validate()){
+                                 _key.currentState!.save();
+                                 provider.setLoading(true);
+                                 firebaseProvider.signInWithGoogle(
+                                     email: emailController.text.toString(),
+                                     password: passwordController.text.toString(),
+                                     context: context
+                                 );
+                               }
+
+
+                             }, width: Get.width, height: 50.0) :
+                             ButtonLoadingWidget(
+                                 loadingMesasge: "login",
+                                 width: MediaQuery.sizeOf(context).width,
+                                 height: 50.0
+                             );
+                           },
+                          ),
+
+                          SizedBox(height: 30.0,),
+                          CustomRichtext(press: (){
+                            Get.to(SignupScreen());
+                          }, firstText: "Don't have an account?", secondText: "Create One")
+                  ],)),
+
+
+
+                ],
+              ),
             ),
           ),
         ),

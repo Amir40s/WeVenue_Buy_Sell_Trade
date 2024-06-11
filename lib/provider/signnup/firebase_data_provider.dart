@@ -60,7 +60,7 @@ class FirebaseDataProvider extends ChangeNotifier{
           DbKey.k_userType : accountType,
           DbKey.k_password : password,
           DbKey.k_address : "",
-          DbKey.k_image : AppString.imagePath,
+          DbKey.k_image : "",
           DbKey.k_date : "${time.day}/${time.month}/${time.year}",
           DbKey.k_time : "${time.hour}:${time.minute}",
           DbKey.k_timestamp : time.millisecondsSinceEpoch,
@@ -85,12 +85,13 @@ class FirebaseDataProvider extends ChangeNotifier{
           email: email,
           password: password
       );
-      if(user !=null){
+
+      if(user.user!.uid.isNotEmpty){
         Provider.of<ValueProvider>(context,listen: false).setLoading(false);
-        Get.to(()=> const BottomNavBar());
+        Get.offAll(()=> const BottomNavBar());
       }else{
         Provider.of<ValueProvider>(context,listen: false).setLoading(false);
-        Get.snackbar("Error", "Something went wrong");
+        Get.snackbar("Error", "invalid credentials");
       }
 
     } on FirebaseAuthException catch (e) {
@@ -103,6 +104,8 @@ class FirebaseDataProvider extends ChangeNotifier{
         Get.snackbar("something wrong", "Please enter correct password.");
         print('Wrong password provided for that user.');
       }
+    }finally{
+      Provider.of<ValueProvider>(context,listen: false).setLoading(false);
     }
 
   }

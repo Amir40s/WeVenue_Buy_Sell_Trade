@@ -40,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(AppIcons.ic_notification,height: defaultIconSize,color: value.myIndex == 0 ? Colors.white : Colors.grey),
+                    Image.asset(AppIcons.ic_home,height: defaultIconSize,color: value.myIndex == 0 ? Colors.white : Colors.grey),
                     const SizedBox(height: 5.0),
                     Text("HOME", style: TextStyle(fontSize: 10.0, color: value.myIndex == 0 ? Colors.white : Colors.grey)),
                   ],
@@ -82,7 +82,7 @@ class BottomNavBar extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(AppIcons.ic_favourite,height: defaultIconSize,color: value.myIndex == 2 ? Colors.white : Colors.grey),
+                    Image.asset(AppIcons.ic_relocation,height: defaultIconSize,color: value.myIndex == 2 ? Colors.white : Colors.grey),
                     const SizedBox(height: 5.0),
                     Text("RELOCATION", style: TextStyle(fontSize: 10.0, color: value.myIndex == 2 ? Colors.white : Colors.grey)),
                   ],
@@ -95,7 +95,7 @@ class BottomNavBar extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(AppIcons.ic_favourite,height: defaultIconSize,color: value.myIndex == 3 ? Colors.white : Colors.grey),
+                    Image.asset(AppIcons.ic_person,height: defaultIconSize,color: value.myIndex == 3 ? Colors.white : Colors.grey),
                     const SizedBox(height: 5.0),
                     Text("Account", style: TextStyle(fontSize: 10.0, color: value.myIndex == 3 ? Colors.white : Colors.grey)),
                   ],

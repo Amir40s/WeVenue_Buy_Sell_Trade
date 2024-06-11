@@ -6,6 +6,7 @@ import 'package:biouwa/helper/simple_header.dart';
 import 'package:biouwa/helper/text_widget.dart';
 import 'package:biouwa/model/product/product_image_model.dart';
 import 'package:biouwa/model/product/product_model.dart';
+import 'package:biouwa/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,7 @@ import 'package:provider/provider.dart';
 import '../../constant.dart';
 import '../../helper/bordder_button_widget.dart';
 import '../../provider/cart/cart_provider.dart';
+import '../../provider/chat/chat_provider.dart';
 import '../../provider/products/products_provider.dart';
 class ProductDetailsScreen extends StatelessWidget {
   final ProductModel product;
@@ -92,15 +94,27 @@ class ProductDetailsScreen extends StatelessWidget {
                             TextWidget(text: "\$${product.cost}", size: 18.0,isBold: true,color: Colors.green,),
                           ],
                         )),
-                    Container(
-                        width: 50.0,
-                        height: 50.0,
-                        margin: EdgeInsets.only(right: 40.0),
-                        decoration: BoxDecoration(
-                          color: primaryColor,
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                        child: Icon(Icons.chat,color: Colors.white,)
+                    GestureDetector(
+                      onTap: () async{
+                        final chatRoomId = await context.read<ChatProvider>().createOrGetChatRoom(product.email,"");
+                        Get.to(ChatScreen(
+                          userUID: product.userUID,
+                          name: product.name,
+                          image: product.profile,
+                          otherEmail: product.email,
+                          chatRoomId: chatRoomId,
+                        ));
+                      },
+                      child: Container(
+                          width: 50.0,
+                          height: 50.0,
+                          margin: EdgeInsets.only(right: 40.0),
+                          decoration: BoxDecoration(
+                            color: primaryColor,
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                          child: Icon(Icons.chat,color: Colors.white,)
+                      ),
                     ),
                   ],
                 ),

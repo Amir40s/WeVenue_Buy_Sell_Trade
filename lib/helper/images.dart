@@ -29,4 +29,6 @@ class AppIcons{
   static const ic_orders = "assets/icons/ic_orders.webp";
   static const ic_faq = "assets/icons/ic_faq.webp";
   static const ic_logout = "assets/icons/ic_logout.webp";
+  static const ic_home = "assets/icons/ic_home.webp";
+  static const ic_relocation = "assets/icons/ic_relocation.webp";
 }

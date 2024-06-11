@@ -4,11 +4,14 @@ import 'package:biouwa/helper/header.dart';
 import 'package:biouwa/helper/images.dart';
 import 'package:biouwa/helper/simple_header.dart';
 import 'package:biouwa/helper/text_widget.dart';
+import 'package:biouwa/provider/account/account_provider.dart';
+import 'package:biouwa/screens/dashboard/account/account_screen.dart';
 import 'package:biouwa/screens/dashboard/menu/moveServices/move_services.dart';
 import 'package:biouwa/screens/dashboard/menu/myListing/my_listing_screen.dart';
 import 'package:biouwa/screens/saveItems/save_items_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../faq/faq_screen.dart';
 class SettingScreen extends StatelessWidget {
@@ -35,7 +38,9 @@ class SettingScreen extends StatelessWidget {
                     icon: AppIcons.ic_person,
                     title: "Account Setting",
                     subtitle: "edit your details, account setting",
-                    press: (){}
+                    press: (){
+                      Get.to(()=> AccountScreen(type: "edit",image: Provider.of<AccountProvider>(context,listen: false).image.toString(),));
+                    }
                 ),
                 SizedBox(height: 20.0,),
                 CustomListTile(

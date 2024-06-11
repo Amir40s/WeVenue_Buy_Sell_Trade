@@ -16,7 +16,13 @@ import '../../../helper/image_loader_widget.dart';
 import '../../../provider/data/image_provider.dart';
 import '../../../provider/constant/value_provider.dart';
 class AccountScreen extends StatelessWidget {
-  AccountScreen({super.key});
+  final String type;
+  String image;
+  AccountScreen({
+    super.key,
+    required this.type,
+    this.image = ""
+  });
 
   var nameController = TextEditingController();
   var emailController = TextEditingController();
@@ -42,7 +48,33 @@ class AccountScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
+                    SizedBox(height: 20.0,),
+                    //back button
+                    if(type == "edit")
+                    GestureDetector(
+                      onTap: (){
+                        Get.back();
+                      },
+                      child: Container(
+                        width: 40.0,
+                        height: 40.0,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black,width: 0.5),
+                          borderRadius: BorderRadius.circular(20.0),
+                          image: DecorationImage(
+                            image: AssetImage("assets/icons/ic_back.webp"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 20.0,),
+                    TextWidget(text: "Account", size: 18.0,isBold: true,),
+                    const SizedBox(height: 10.0,),
+                    // TextWidget(text: "Name", size: 14.0,isBold: true,),
+                    // const SizedBox(height: 10.0,),
+                    const SizedBox(height: 20.0,),
+                    if(type == "edit")
                     Consumer<ImagePickProvider>(
                     builder: (context, prov, child){
                       return GestureDetector(
@@ -60,19 +92,38 @@ class AccountScreen extends StatelessWidget {
                           alignment: AlignmentDirectional.center,
                           child: CircleAvatar(
                             radius: 50.0,
-                            child: ImageLoaderWidget(imageUrl: accountProvider.image.toString() ,),
+                            child: ImageLoaderWidget(imageUrl: image,),
                           )
                         ),
                       );
                     },
                     ),
+
+                    if(type == "bottom")
+                      accountProvider.image != "" ?
+                    Align(
+                        alignment: AlignmentDirectional.center,
+                        child: CircleAvatar(
+                          radius: 50.0,
+                          backgroundImage: NetworkImage(accountProvider.image.toString()),
+                          // child: ImageLoaderWidget(imageUrl: accountProvider.image.toString() ,),
+                        )
+                    ) : Align(
+                          alignment: AlignmentDirectional.center,
+                          child: CircleAvatar(
+                            radius: 50.0,
+                            backgroundColor: lightGrey,
+                            backgroundImage: AssetImage("assets/icons/ic_profile_image.webp"),
+                            // child: ImageLoaderWidget(imageUrl: accountProvider.image.toString() ,),
+                          )
+                      ),
                     Align(
                         alignment: AlignmentDirectional.center,
                         child: TextWidget(text: "My Account", size: 18.0,isBold: true,)),
 
-                    SizedBox(height: 20.0,),
+                    const SizedBox(height: 20.0,),
                     TextWidget(text: "Name", size: 14.0,isBold: true,),
-                    SizedBox(height: 10.0,),
+                    const SizedBox(height: 10.0,),
                     ReInputField(
                       hintText: nameController.text = accountProvider.name.toString(),
                       controller: nameController,
@@ -80,9 +131,9 @@ class AccountScreen extends StatelessWidget {
                       isPrefix : false,
                     ),
 
-                    SizedBox(height: 10.0,),
+                    const SizedBox(height: 10.0,),
                     TextWidget(text: "Email", size: 14.0,isBold: true,),
-                    SizedBox(height: 10.0,),
+                    const SizedBox(height: 10.0,),
                     ReInputField(
                         hintText: emailController.text = accountProvider.email.toString(),
                         controller: emailController,
@@ -90,19 +141,19 @@ class AccountScreen extends StatelessWidget {
                         isPrefix : false
                     ),
 
-                    SizedBox(height: 10.0,),
+                    const SizedBox(height: 10.0,),
                     TextWidget(text: "Phone", size: 14.0,isBold: true,),
-                    SizedBox(height: 10.0,),
+                    const SizedBox(height: 10.0,),
                     ReInputField(
                         hintText: phoneController.text = accountProvider.phone.toString(),
                         controller: phoneController,
                         prefixPath: "",
-                        isPrefix : false
+                        isPrefix : false,
                     ),
 
-                    SizedBox(height: 10.0,),
+                    const SizedBox(height: 10.0,),
                     TextWidget(text: "Address", size: 14.0,isBold: true,),
-                    SizedBox(height: 10.0,),
+                    const SizedBox(height: 10.0,),
                     ReInputField(
                         hintText: addressController.text = accountProvider.address.toString(),
                         controller: addressController,
@@ -113,6 +164,7 @@ class AccountScreen extends StatelessWidget {
 
                     const SizedBox(height: 40.0,),
 
+                    if(type =="bottom")
                     GestureDetector(
                       onTap: (){
                         Get.to(()=> SettingScreen());
@@ -142,29 +194,30 @@ class AccountScreen extends StatelessWidget {
 
                     const SizedBox(height: 40.0,),
 
-                    // Consumer<ValueProvider>(
-                    //   builder: (context, provider, child){
-                    //     return provider.isLoading == false  ? ButtonWidget(text: "Update", onClicked: () async{
-                    //       provider.setLoading(true);
-                    //       String? url;
-                    //       if(imageProvider.imageFile!=null){
-                    //         url = await imageProvider.uploadImage(imageFile: imageProvider.imageFile!);
-                    //       }else{
-                    //         url = accountProvider.image.toString();
-                    //       }
-                    //       accountProvider.updateUserProfile(
-                    //           name: nameController.text.toString().trim(),
-                    //           email: emailController.text.toString().trim(),
-                    //           phone: phoneController.text.toString().trim(),
-                    //           address: addressController.text.toString().trim(),
-                    //           image: url,
-                    //         context: context
-                    //       );
-                    //       log("Url: ${url.toString()}");
-                    //     }, width: Get.width, height: 50.0) :
-                    //     ButtonLoadingWidget(loadingMesasge: "updating",width: Get.width, height: 50.0);
-                    //   },
-                    // ),
+                    if(type =="edit")
+                    Consumer<ValueProvider>(
+                      builder: (context, provider, child){
+                        return provider.isLoading == false  ? ButtonWidget(text: "Update", onClicked: () async{
+                          provider.setLoading(true);
+                          String? url;
+                          if(imageProvider.imageFile!=null){
+                            url = await imageProvider.uploadImage(imageFile: imageProvider.imageFile!);
+                          }else{
+                            url = accountProvider.image.toString();
+                          }
+                          accountProvider.updateUserProfile(
+                              name: nameController.text.toString().trim(),
+                              email: emailController.text.toString().trim(),
+                              phone: phoneController.text.toString().trim(),
+                              address: addressController.text.toString().trim(),
+                              image: url,
+                            context: context
+                          );
+                          log("Url: ${url.toString()}");
+                        }, width: Get.width, height: 50.0) :
+                        ButtonLoadingWidget(loadingMesasge: "updating",width: Get.width, height: 50.0);
+                      },
+                    ),
 
                   ],
                 );

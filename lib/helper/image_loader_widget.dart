@@ -12,7 +12,7 @@ class ImageLoaderWidget extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: imageUrl,
       placeholder: (context, url) => CircularProgressIndicator(color: primaryColor,), // Path to your placeholder image
-      errorWidget: (context, url, error) => Icon(Icons.error), // Display an error icon if the image fails to load
+      errorWidget: (context, url, error) => Image.asset("assets/icons/ic_profile_image.webp"), // Display an error icon if the image fails to load
       fit: BoxFit.cover,
     );
   }
