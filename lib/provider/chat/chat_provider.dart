@@ -204,24 +204,6 @@ class ChatProvider with ChangeNotifier {
   }
 
 
-  // Future<void> markMessageAsRead(String chatRoomId) async {
-  //   final currentUserEmail = auth.currentUser!.email;
-  //   final messageDocs = await _firestore
-  //       .collection('chatRooms')
-  //       .doc(chatRoomId)
-  //       .collection('messages')
-  //       .where('sender', isNotEqualTo: currentUserEmail)
-  //       .get();
-  //
-  //   for (var doc in messageDocs.docs) {
-  //     if (!(doc['read'] as bool)) {
-  //       await doc.reference.update({'read': true});
-  //       _unreadChatRooms.remove(chatRoomId);
-  //       notifyListeners();
-  //     }
-  //   }
-  // }
-
   Future<String> createChatRoom(String otherUserEmail,String lastMessage) async {
     final chatRoom = await _firestore.collection('chatRooms').add({
       'users': [auth.currentUser!.email, otherUserEmail],
@@ -254,15 +236,6 @@ class ChatProvider with ChangeNotifier {
         .orderBy('timestamp', descending: true)
         .snapshots();
   }
-  // Stream<List<MessageModel>> getMessages(String chatRoomId) {
-  //   return _firestore
-  //       .collection('chatRooms')
-  //       .doc(chatRoomId)
-  //       .collection('messages')
-  //       .orderBy('timestamp', descending: true)
-  //       .snapshots()
-  //       .map((snapshot) => snapshot.docs.map((doc) => MessageModel.fromMap(doc.data() as Map<String, dynamic>, doc.id)).toList());
-  // }
 
   Future<String> createOrGetChatRoom(String otherUserEmail,String lastMessage) async {
     final currentUserEmail = auth.currentUser!.email!;

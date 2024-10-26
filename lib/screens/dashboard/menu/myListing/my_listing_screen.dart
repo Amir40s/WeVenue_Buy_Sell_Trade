@@ -29,52 +29,52 @@ class MyListingScreen extends StatelessWidget {
                 SizedBox(height: 40.0,),
                 TextWidget(text: "My Listing", size: 22.0,color: Colors.black,isBold: true,),
                 SizedBox(height: 40.0,),
-             Consumer<ProductProvider>(
-              builder: (context, productProvider, child) {
-                return StreamBuilder<List<ProductModel>>(
-                  stream: productProvider.getMyProducts(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                    if (snapshot.hasError) {
-                      return Center(child: Text('Error: ${snapshot.error}'));
-                    }
-                    if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Center(child: Text('No products found'));
-                    }
+                Consumer<ProductProvider>(
+                  builder: (context, productProvider, child) {
+                    return StreamBuilder<List<ProductModel>>(
+                      stream: productProvider.getMyProducts(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        if (snapshot.hasError) {
+                          return Center(child: Text('Error: ${snapshot.error}'));
+                        }
+                        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                          return Center(child: Text('No products found'));
+                        }
 
-                    List<ProductModel> products = snapshot.data!;
+                        List<ProductModel> products = snapshot.data!;
 
 
-                    // return GridView.builder(
-                    //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    //       crossAxisCount: 2, // Number of columns
-                    //       crossAxisSpacing: 10.0,
-                    //       mainAxisSpacing: 10.0,
-                    //       childAspectRatio: 0.6
-                    //   ),
-                    //   itemCount: products.length,
-                    //   shrinkWrap: true,
-                    //   itemBuilder: (context, index) {
-                    //     ProductModel product = products[index];
-                    //     return itemsList(products: product);
-                    //   },
-                    // );
+                        // return GridView.builder(
+                        //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        //       crossAxisCount: 2, // Number of columns
+                        //       crossAxisSpacing: 10.0,
+                        //       mainAxisSpacing: 10.0,
+                        //       childAspectRatio: 0.6
+                        //   ),
+                        //   itemCount: products.length,
+                        //   shrinkWrap: true,
+                        //   itemBuilder: (context, index) {
+                        //     ProductModel product = products[index];
+                        //     return itemsList(products: product);
+                        //   },
+                        // );
 
-                    return ListView.builder(
+                        return ListView.builder(
 
-                      itemCount: products.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        ProductModel product = products[index];
-                        return itemsList(products: product,context: context);
+                          itemCount: products.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            ProductModel product = products[index];
+                            return itemsList(products: product,context: context);
+                          },
+                        );
                       },
                     );
                   },
-                );
-              },
-            ),
+                ),
               ],
             ),
           ),
@@ -134,32 +134,31 @@ class MyListingScreen extends StatelessWidget {
   Card itemsList({required ProductModel products,required BuildContext context}){
     return Card(
       // margin: EdgeInsets.only(top: 5.0,bottom: 5.0),
-      color: Colors.white,
-      child: ListTile(
-        leading: ImageLoaderWidget(imageUrl: products.image.toString(),),
-        title: TextWidget(text: products.title,size: 14.0,isBold: true),
-        subtitle: TextWidget(text: "\$${products.cost}",size: 14.0,isBold: true,color: primaryColor,),
-        trailing: Column(
-          children: [
-            IconButton(icon: Icon(Icons.delete,color: Colors.red,size: 24,),onPressed: (){
+        color: Colors.white,
+        child: ListTile(
+          leading: ImageLoaderWidget(imageUrl: products.image.toString(),),
+          title: TextWidget(text: products.title,size: 14.0,isBold: true),
+          subtitle: TextWidget(text: "\$${products.cost}",size: 14.0,isBold: true,color: primaryColor,),
+          trailing: Column(
+            children: [
+              IconButton(icon: Icon(Icons.delete,color: Colors.red,size: 24,),onPressed: (){
 
-              customDialog(
-                  onClick: () async{
-                Get.back();
-                await Provider.of<ProductProvider>(context,listen: false).deleteProduct(
-                    productId: products.docID,
-                    imageUrl: products.image
-                );
+                customDialog(
+                    onClick: () async{
+                      Get.back();
+                      await Provider.of<ProductProvider>(context,listen: false).deleteProduct(
+                          productId: products.docID,
+                          imageUrl: products.image
+                      );
 
-              }, title: "Alert!!!!", content: "are you sure to delete this product?");
-            }),
-          ],
-        ),
-        onTap: (){
-         // Get.to(EditProductScreen(id: products.id));
-        },
-      )
+                    }, title: "Alert!!!!", content: "are you sure to delete this product?");
+              }),
+            ],
+          ),
+          onTap: (){
+            // Get.to(EditProductScreen(id: products.id));
+          },
+        )
     );
   }
 }
-

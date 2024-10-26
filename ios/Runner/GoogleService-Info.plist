@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCv2btemmHEL4TnpTCjf1PraabxXez6U9c</string>
+	<string>AIzaSyCMx7zq6s6jV51uDn_9MCVNqQWOtNCw7sk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>760503330801</string>
+	<string>827103172443</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.solinovation.biouwa</string>
 	<key>PROJECT_ID</key>
-	<string>biouwa</string>
+	<string>wevenue-f9502</string>
 	<key>STORAGE_BUCKET</key>
-	<string>biouwa.appspot.com</string>
+	<string>wevenue-f9502.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:760503330801:ios:c5e553df687c926a630650</string>
+	<string>1:827103172443:ios:10d04be478e5d916fa6c7e</string>
 </dict>
 </plist>

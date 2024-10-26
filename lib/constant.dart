@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-const primaryColor = Color(0xFFC60AF5);
+const primaryColor = Color(0xFFC11C84);
 const darkPurple = Color(0xFF7132F5);
 const secondaryColor = Color(0xFFF857A6);
 const orangeColor = Color(0xFFE25D6C);

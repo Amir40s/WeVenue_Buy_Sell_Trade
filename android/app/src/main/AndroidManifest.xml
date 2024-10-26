@@ -9,7 +9,7 @@
     <!-- Other configurations -->
 
     <application
-        android:label="biouwa"
+        android:label="WEVENUE"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

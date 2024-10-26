@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDfWNTSQR2ODEoKWzjZeBCThRKtXePgGQ0',
-    appId: '1:760503330801:android:1e4dedd1a42bcd31630650',
-    messagingSenderId: '760503330801',
-    projectId: 'biouwa',
-    storageBucket: 'biouwa.appspot.com',
+    apiKey: 'AIzaSyDly9oDk9NWM6n6fhWZcaQUT95NDPHY4kQ',
+    appId: '1:827103172443:android:e1573b9697166881fa6c7e',
+    messagingSenderId: '827103172443',
+    projectId: 'wevenue-f9502',
+    storageBucket: 'wevenue-f9502.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCv2btemmHEL4TnpTCjf1PraabxXez6U9c',
-    appId: '1:760503330801:ios:c5e553df687c926a630650',
-    messagingSenderId: '760503330801',
-    projectId: 'biouwa',
-    storageBucket: 'biouwa.appspot.com',
+    apiKey: 'AIzaSyCMx7zq6s6jV51uDn_9MCVNqQWOtNCw7sk',
+    appId: '1:827103172443:ios:10d04be478e5d916fa6c7e',
+    messagingSenderId: '827103172443',
+    projectId: 'wevenue-f9502',
+    storageBucket: 'wevenue-f9502.appspot.com',
     iosBundleId: 'com.solinovation.biouwa',
   );
+
 }

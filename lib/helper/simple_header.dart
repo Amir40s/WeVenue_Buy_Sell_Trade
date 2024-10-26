@@ -2,11 +2,13 @@ import 'package:biouwa/helper/images.dart';
 import 'package:biouwa/helper/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../model/app_string.dart';
 class SimpleHeader extends StatelessWidget {
   final suffixText,prefixText;
   bool isSuffix;
   final suffixTextSize, prefixTextSize;
-   SimpleHeader({super.key, this.suffixText = "BioUWa",
+   SimpleHeader({super.key, this.suffixText = AppText.appName,
      this.isSuffix = false,this.prefixText = "",
      this.suffixTextSize = 14.0, this.prefixTextSize=14.0});
 
