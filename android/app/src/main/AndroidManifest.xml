@@ -9,7 +9,7 @@
     <!-- Other configurations -->
 
     <application
-        android:label="WEVENUE"
+        android:label="Wevenue"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
