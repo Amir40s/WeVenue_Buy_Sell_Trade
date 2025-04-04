@@ -9,11 +9,12 @@ import '../uploadItems/items_upload_screen.dart';
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
 
- final double defaultIconSize = 20.0;
+  final double defaultIconSize = 20.0;
 
   @override
   Widget build(BuildContext context) {
-    var bottomBarProvider = Provider.of<BottomBarProvider>(context, listen: false);
+    var bottomBarProvider =
+        Provider.of<BottomBarProvider>(context, listen: false);
 
     return Scaffold(
       backgroundColor: lightGrey,
@@ -28,86 +29,120 @@ class BottomNavBar extends StatelessWidget {
         notchMargin: 0.5,
         color: darkGrey,
         surfaceTintColor: Colors.transparent,
-        child: Consumer<BottomBarProvider>(builder: (context,value,child){
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  bottomBarProvider.changeMyIndex(0);
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(AppIcons.ic_home,height: defaultIconSize,color: value.myIndex == 0 ? Colors.white : Colors.grey),
-                    const SizedBox(height: 5.0),
-                    Text("HOME", style: TextStyle(fontSize: 10.0, color: value.myIndex == 0 ? Colors.white : Colors.grey)),
-                  ],
+        child: Consumer<BottomBarProvider>(
+          builder: (context, value, child) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    bottomBarProvider.changeMyIndex(0);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(AppIcons.ic_home,
+                          height: defaultIconSize,
+                          color:
+                              value.myIndex == 0 ? Colors.white : Colors.grey),
+                      const SizedBox(height: 5.0),
+                      Text("HOME",
+                          style: TextStyle(
+                              fontSize: 10.0,
+                              color: value.myIndex == 0
+                                  ? Colors.white
+                                  : Colors.grey)),
+                    ],
+                  ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  bottomBarProvider.changeMyIndex(1);
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(AppIcons.ic_chat,height: defaultIconSize,color: value.myIndex == 1 ? Colors.white : Colors.grey),
-                    const SizedBox(height: 5.0),
-                    Text("CHATS", style: TextStyle(fontSize: 10.0, color: value.myIndex == 1 ? Colors.white : Colors.grey)),
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    bottomBarProvider.changeMyIndex(1);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(AppIcons.ic_chat,
+                          height: defaultIconSize,
+                          color:
+                              value.myIndex == 1 ? Colors.white : Colors.grey),
+                      const SizedBox(height: 5.0),
+                      Text("CHATS",
+                          style: TextStyle(
+                              fontSize: 10.0,
+                              color: value.myIndex == 1
+                                  ? Colors.white
+                                  : Colors.grey)),
+                    ],
+                  ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  bottomBarProvider.changeMyIndex(2);
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    const Icon(null),
-                     SizedBox(height: Get.width * 0.010),
-                    // SizedBox(height: Get.width * 0.010),
-                     SizedBox(width: Get.width * 0.010),
-                    const Text("PUBLISH", style: TextStyle(fontSize: 10.0, color: Colors.grey)),
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    bottomBarProvider.changeMyIndex(2);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const Icon(null),
+                      SizedBox(height: Get.width * 0.010),
+                      // SizedBox(height: Get.width * 0.010),
+                      SizedBox(width: Get.width * 0.010),
+                      const Text("PUBLISH",
+                          style: TextStyle(fontSize: 10.0, color: Colors.grey)),
+                    ],
+                  ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  bottomBarProvider.changeMyIndex(2);
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(AppIcons.ic_relocation,height: defaultIconSize,color: value.myIndex == 2 ? Colors.white : Colors.grey),
-                    const SizedBox(height: 5.0),
-                    Text("RELOCATION", style: TextStyle(fontSize: 10.0, color: value.myIndex == 2 ? Colors.white : Colors.grey)),
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    bottomBarProvider.changeMyIndex(2);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(AppIcons.ic_relocation,
+                          height: defaultIconSize,
+                          color:
+                              value.myIndex == 2 ? Colors.white : Colors.grey),
+                      const SizedBox(height: 5.0),
+                      Text("RELOCATION",
+                          style: TextStyle(
+                              fontSize: 10.0,
+                              color: value.myIndex == 2
+                                  ? Colors.white
+                                  : Colors.grey)),
+                    ],
+                  ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  bottomBarProvider.changeMyIndex(3);
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(AppIcons.ic_person,height: defaultIconSize,color: value.myIndex == 3 ? Colors.white : Colors.grey),
-                    const SizedBox(height: 5.0),
-                    Text("Account", style: TextStyle(fontSize: 10.0, color: value.myIndex == 3 ? Colors.white : Colors.grey)),
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    bottomBarProvider.changeMyIndex(3);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(AppIcons.ic_person,
+                          height: defaultIconSize,
+                          color:
+                              value.myIndex == 3 ? Colors.white : Colors.grey),
+                      const SizedBox(height: 5.0),
+                      Text("Account",
+                          style: TextStyle(
+                              fontSize: 10.0,
+                              color: value.myIndex == 3
+                                  ? Colors.white
+                                  : Colors.grey)),
+                    ],
+                  ),
                 ),
-              ),
-
-            ],
-          );
-        },
+              ],
+            );
+          },
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
       floatingActionButton: Consumer<BottomBarProvider>(
         builder: (context, value, child) {
           return FloatingActionButton.large(
@@ -119,10 +154,11 @@ class BottomNavBar extends StatelessWidget {
             disabledElevation: 0.0,
             elevation: 0.0,
             onPressed: () {
-             Get.to(()=> ItemsUploadScreen());
+              Get.to(() => ItemsUploadScreen());
             },
             child: Image.asset(
-              AppIcons.ic_add,height: 200.0,
+              AppIcons.ic_add,
+              height: 200.0,
             ),
           );
         },

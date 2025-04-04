@@ -48,7 +48,7 @@ class AccountScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
-                    SizedBox(height: 20.0,),
+                    const SizedBox(height: 20.0,),
                     //back button
                     if(type == "edit")
                     GestureDetector(
@@ -61,7 +61,7 @@ class AccountScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.black,width: 0.5),
                           borderRadius: BorderRadius.circular(20.0),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: AssetImage("assets/icons/ic_back.webp"),
                             fit: BoxFit.cover,
                           ),
@@ -108,7 +108,7 @@ class AccountScreen extends StatelessWidget {
                           backgroundImage: NetworkImage(accountProvider.image.toString()),
                           // child: ImageLoaderWidget(imageUrl: accountProvider.image.toString() ,),
                         )
-                    ) : Align(
+                    ) : const Align(
                           alignment: AlignmentDirectional.center,
                           child: CircleAvatar(
                             radius: 50.0,
@@ -167,11 +167,11 @@ class AccountScreen extends StatelessWidget {
                     if(type =="bottom")
                     GestureDetector(
                       onTap: (){
-                        Get.to(()=> SettingScreen());
+                        Get.to(()=> const SettingScreen());
                       },
                       child: Container(
                         width: Get.width / 2,
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: primaryColor,
@@ -185,7 +185,7 @@ class AccountScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Image.asset(AppIcons.ic_setting,width: 24.0,height: 24.0,),
-                            SizedBox(width: 10.0,),
+                            const SizedBox(width: 10.0,),
                             TextWidget(text: "Setting", size: 14.0,color: primaryColor,)
                           ],
                         ),

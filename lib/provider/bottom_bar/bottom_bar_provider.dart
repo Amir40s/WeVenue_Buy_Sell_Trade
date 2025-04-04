@@ -5,17 +5,14 @@ import 'package:flutter/material.dart';
 
 import '../../screens/dashboard/dashboard_screen.dart';
 
-
-
 class BottomBarProvider with ChangeNotifier {
   int _myIndex = 0;
   List<Widget> _myList = [
-     DashboardScreen(),
-     // DashboardScreen(),
-     ChatListScreen(),
+    DashboardScreen(),
+    ChatListScreen(),
     RelocationScreen(),
-     AccountScreen(type: 'bottom',),
-     DashboardScreen(),
+    AccountScreen(type: 'bottom'),
+    DashboardScreen(),
   ];
 
   int get myIndex => _myIndex;
