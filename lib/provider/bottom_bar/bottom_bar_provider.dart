@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:biouwa/screens/chat/chat_list_screen.dart';
 import 'package:biouwa/screens/dashboard/account/account_screen.dart';
 import 'package:biouwa/screens/dashboard/relocation/relocation_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../screens/dashboard/dashboard_screen.dart';
@@ -9,11 +12,30 @@ class BottomBarProvider with ChangeNotifier {
   int _myIndex = 0;
   List<Widget> _myList = [
     DashboardScreen(),
-    ChatListScreen(),
+    const ChatListScreen(),
     RelocationScreen(),
     AccountScreen(type: 'bottom'),
     DashboardScreen(),
   ];
+
+  BottomBarProvider() {
+    log('Constructor Called');
+    _init();
+  }
+
+  bool _isLoggedIn = false;
+
+  bool get isLoggedIn => _isLoggedIn;
+
+  void _init() {
+    final user = FirebaseAuth.instance.currentUser;
+    _isLoggedIn = user != null;
+    notifyListeners();
+  }
+
+  void refreshStatus() {
+    _init();
+  }
 
   int get myIndex => _myIndex;
 

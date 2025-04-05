@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
 import '../../constant.dart';
 import '../../helper/images.dart';
 import '../../provider/bottom_bar/bottom_bar_provider.dart';
 import '../uploadItems/items_upload_screen.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
 
+  @override
+  State<BottomNavBar> createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
   final double defaultIconSize = 20.0;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<BottomBarProvider>(context, listen: false).refreshStatus();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

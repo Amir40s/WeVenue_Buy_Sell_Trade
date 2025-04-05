@@ -1,8 +1,9 @@
-class Images{
-static const bottom_background = "assets/images/menu_bottom_background.webp";
+class Images {
+  static const bottom_background = "assets/images/menu_bottom_background.webp";
+  static const noData = "assets/images/NoData.svg";
 }
 
-class AppIcons{
+class AppIcons {
   static const ic_logo = "assets/icons/ic_logo.webp";
   static const ic_back = "assets/icons/ic_back.webp";
   static const ic_email = "assets/icons/ic_email.webp";
