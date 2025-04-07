@@ -283,9 +283,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                       width: 24.0,
                                       height: 24.0,
                                     ),
-                                    const SizedBox(
-                                      width: 10.0,
-                                    ),
+                                    const SizedBox(width: 10.0),
                                     TextWidget(
                                       text: "Setting",
                                       size: 14.0,

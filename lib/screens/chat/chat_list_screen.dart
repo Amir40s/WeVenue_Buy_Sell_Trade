@@ -114,7 +114,7 @@ class ChatListScreen extends StatelessWidget {
                                         )
                                       : const CircleAvatar(
                                           child: Center(
-                                            child: Icon(Icons.question_mark),
+                                            child: Icon(Icons.person),
                                           ),
                                         ),
                                   title: TextWidget(
