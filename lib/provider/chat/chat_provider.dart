@@ -15,7 +15,7 @@ class ChatProvider with ChangeNotifier {
   List<MessageModel> _messages = [];
   List<UserModel> _users = [];
   List<ChatRoomModel> _chatRooms = [];
-  Map<String, int> _unreadMessageCounts = {};
+  final Map<String, int> _unreadMessageCounts = {};
 
 
 
@@ -77,7 +77,7 @@ class ChatProvider with ChangeNotifier {
         .snapshots()
         .asyncMap((snapshot) async {
       final chatRooms = snapshot.docs.map((doc) {
-        final chatRoom = ChatRoomModel.fromMap(doc.data() as Map<String, dynamic>, doc.id);
+        final chatRoom = ChatRoomModel.fromMap(doc.data(), doc.id);
         chatRoom.unreadMessageCount = _unreadMessageCounts[chatRoom.id] ?? 0;
         return chatRoom;
       }).toList();
@@ -100,7 +100,7 @@ class ChatProvider with ChangeNotifier {
   }
 
   Future<int> getUnreadMessageCount(String chatRoomId) async {
-    log("Chat ID ${chatRoomId}");
+    log("Chat ID $chatRoomId");
     final currentUserEmail = auth.currentUser!.email!;
     final messagesSnapshot = await _firestore
         .collection('chatRooms')
@@ -181,7 +181,7 @@ class ChatProvider with ChangeNotifier {
   }
 
   Future<void> updateMessageStatus(String chatRoomID) async{
-    log("message ${chatRoomID} : run");
+    log("message $chatRoomID : run");
     await _firestore.collection("chatRooms").doc(chatRoomID).update({"isMessage" : "seen"});
   }
 

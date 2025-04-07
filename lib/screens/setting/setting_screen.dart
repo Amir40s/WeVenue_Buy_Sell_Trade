@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:biouwa/constant.dart';
 import 'package:biouwa/helper/custom_listtile.dart';
 import 'package:biouwa/helper/images.dart';
@@ -8,9 +10,11 @@ import 'package:biouwa/screens/dashboard/account/account_screen.dart';
 import 'package:biouwa/screens/dashboard/menu/moveServices/move_services.dart';
 import 'package:biouwa/screens/dashboard/menu/myListing/my_listing_screen.dart';
 import 'package:biouwa/screens/saveItems/save_items_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
 import '../faq/faq_screen.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -28,7 +32,7 @@ class SettingScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SimpleHeader(),
+                const SimpleHeader(),
                 const SizedBox(
                   height: 40.0,
                 ),
@@ -116,25 +120,49 @@ class SettingScreen extends StatelessWidget {
                     showReAuthDialog(context);
                   },
                 ),
-
                 const SizedBox(
                   height: 20.0,
                 ),
                 CustomListTile(
-                    icon: AppIcons.ic_logout,
-                    title: "Logout",
-                    subtitle: "logout your account",
-                    press: () {
-                      Get.defaultDialog(
-                        title: "Logout",
-                        content: const Text("Are you sure want to logout?"),
-                        textCancel: "No",
-                        textConfirm: "Yes",
-                        onConfirm: () {
-                          logout();
-                        },
-                      );
-                    }),
+                  icon: AppIcons.ic_logout,
+                  title: "Logout",
+                  subtitle: "logout your account",
+                  press: () {
+                    Platform.isIOS
+                        ? showCupertinoDialog(
+                            context: context,
+                            builder: (context) => CupertinoAlertDialog(
+                              title: const Text("Logout"),
+                              content: const Text(
+                                  "Are you sure you want to logout?"),
+                              actions: [
+                                CupertinoDialogAction(
+                                  child: const Text("No"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                CupertinoDialogAction(
+                                  child: const Text("Yes"),
+                                  onPressed: () {
+                                    logout(); // Your logout logic here
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            ),
+                          )
+                        : Get.defaultDialog(
+                            title: "Logout",
+                            content: const Text("Are you sure want to logout?"),
+                            textCancel: "No",
+                            textConfirm: "Yes",
+                            onConfirm: () {
+                              logout();
+                            },
+                          );
+                  },
+                ),
               ],
             ),
           ),

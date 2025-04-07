@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'images.dart';
 class CustomIconsButton extends StatelessWidget {
   final String iconPath;
   const CustomIconsButton({super.key, required this.iconPath});
@@ -8,7 +7,7 @@ class CustomIconsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),

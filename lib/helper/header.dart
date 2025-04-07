@@ -36,7 +36,7 @@ class Header extends StatelessWidget {
               GestureDetector(
                 onTap: provider.isLoggedIn
                     ? () {
-                        Get.to(() => CartScreen());
+                        Get.to(() => const CartScreen());
                       }
                     : () {},
                 child: Stack(children: [

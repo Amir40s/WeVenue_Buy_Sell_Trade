@@ -5,7 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class NoUserWidget extends StatelessWidget {
-  const NoUserWidget({super.key});
+  const NoUserWidget({super.key, this.msj, this.title});
+
+  final String? msj;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +26,13 @@ class NoUserWidget extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               TextWidget(
-                text: 'No User Found',
+                text: title ?? 'No User Found',
                 size: 18,
                 isBold: true,
               ),
               const SizedBox(height: 8),
               TextWidget(
-                text:
+                text: msj ??
                     'It looks like you’re not logged in or don’t have an account yet.',
                 size: 14,
                 color: Colors.grey,

@@ -39,7 +39,7 @@ class MenuScreen extends StatelessWidget {
                         TextWidget(text: "X", size: 22.0),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
                     CustomListTile(
@@ -50,7 +50,7 @@ class MenuScreen extends StatelessWidget {
                       title: "Moving Services",
                       subtitle: "Check Mover Available",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
                     CustomListTile(
@@ -59,7 +59,7 @@ class MenuScreen extends StatelessWidget {
                       title: "My Account",
                       subtitle: "Edit your details, account setting",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
                     CustomListTile(
@@ -68,19 +68,19 @@ class MenuScreen extends StatelessWidget {
                       title: "My Orders",
                       subtitle: "view all your orders",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
                     CustomListTile(
                       press: () {
                         print("press");
-                        Get.to(() => MyListingScreen());
+                        Get.to(() => const MyListingScreen());
                       },
                       icon: AppIcons.ic_name,
                       title: "My Listings",
                       subtitle: "view your product listing for sale",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
                     CustomListTile(
@@ -89,7 +89,7 @@ class MenuScreen extends StatelessWidget {
                       title: "Like Items",
                       subtitle: "see the products you have wishlist",
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
                     Row(

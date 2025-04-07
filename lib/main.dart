@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:biouwa/helper/dropdown_provider.dart';
 import 'package:biouwa/provider/account/account_provider.dart';
 import 'package:biouwa/provider/bottom_bar/bottom_bar_provider.dart';
@@ -12,6 +14,7 @@ import 'package:biouwa/provider/products/products_provider.dart';
 import 'package:biouwa/provider/signnup/firebase_data_provider.dart';
 import 'package:biouwa/start/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -51,15 +54,24 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => FAQProvider()),
         ChangeNotifierProvider(create: (_) => ChatProvider()),
       ],
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: SplashScreen(),
-      ),
+      child: Platform.isIOS
+          ? const GetCupertinoApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Demo',
+              theme: CupertinoThemeData(
+                primaryColor: Colors.deepPurple,
+              ),
+              home: SplashScreen(),
+            )
+          : GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                useMaterial3: true,
+              ),
+              home: const SplashScreen(),
+            ),
     );
   }
 }

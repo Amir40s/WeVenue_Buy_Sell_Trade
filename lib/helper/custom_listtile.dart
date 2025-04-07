@@ -1,5 +1,4 @@
 import 'package:biouwa/constant.dart';
-import 'package:biouwa/helper/images.dart';
 import 'package:biouwa/helper/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

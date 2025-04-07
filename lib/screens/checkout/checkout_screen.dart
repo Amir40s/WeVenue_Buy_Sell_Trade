@@ -24,46 +24,46 @@ class CheckoutScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SimpleHeader(),
-            SizedBox(height: 20.0,),
-            OrderProgressIndicator(progress: 0.38,),
-            SizedBox(height: 20.0,),
+            const SimpleHeader(),
+            const SizedBox(height: 20.0,),
+            const OrderProgressIndicator(progress: 0.38,),
+            const SizedBox(height: 20.0,),
             TextWidget(
                 text: "Default Address",
                 size: 14.0
             ),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             CustomTextField(
               hintText: 'Enter Default Address',
               controller: addressController,
               fillColor: customGrey,
             ),
 
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             TextWidget(
                 text: "Full Name",
                 size: 14.0
             ),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             CustomTextField(
               hintText: 'Enter your Name',
               controller: nameController,
               fillColor: customGrey,
             ),
 
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             TextWidget(
                 text: "Phone Number",
                 size: 14.0
             ),
-            SizedBox(height: 10.0,),
+            const SizedBox(height: 10.0,),
             CustomTextField(
               hintText: 'Enter Phone Number',
               controller: phoneController,
               fillColor: customGrey,
             ),
 
-            SizedBox(height: 40.0,),
+            const SizedBox(height: 40.0,),
             ButtonWidget(
               text: 'Continue',
               width: Get.width,

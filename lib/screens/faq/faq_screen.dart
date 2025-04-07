@@ -7,7 +7,7 @@ import '../../helper/text_widget.dart';
 import '../../provider/items/faq_provider.dart';
 
 class FAQScreen extends StatelessWidget {
-  const FAQScreen({Key? key}) : super(key: key);
+  const FAQScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,10 @@ class FAQScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SimpleHeader(),
-                SizedBox(height: 40.0,),
+                const SimpleHeader(),
+                const SizedBox(height: 40.0,),
                 TextWidget(text: "Frequently Asked Questions", size: 22.0,color: Colors.black,isBold: true,),
-                SizedBox(height: 40.0,),
+                const SizedBox(height: 40.0,),
                 ListView.builder(
                   itemCount: faqs.length,
                   shrinkWrap: true,

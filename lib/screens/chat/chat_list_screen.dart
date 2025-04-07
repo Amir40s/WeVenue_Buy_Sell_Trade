@@ -1,7 +1,9 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:biouwa/helper/no_user_widget.dart';
 import 'package:biouwa/helper/text_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +13,7 @@ import '../../model/message/chatroom_model.dart';
 import '../../model/message/user_model.dart';
 import '../../provider/bottom_bar/bottom_bar_provider.dart';
 import '../../provider/chat/chat_provider.dart';
-import 'chat_screen.dart'; // Import your ChatProvider class
+import 'chat_screen.dart';
 
 class ChatListScreen extends StatelessWidget {
   const ChatListScreen({super.key});
@@ -54,8 +56,10 @@ class ChatListScreen extends StatelessWidget {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
+                              return Center(
+                                child: Platform.isIOS
+                                    ? const CupertinoActivityIndicator()
+                                    : const CircularProgressIndicator(),
                               );
                             }
                             if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -75,31 +79,44 @@ class ChatListScreen extends StatelessWidget {
                                 var otherUserEmail = chatRoom.users.firstWhere(
                                     (user) => user != auth.currentUser!.email);
                                 var lastMessage = chatRoom.lastMessage;
-                                // var timeStamp = chatRoom[index].lastTimestamp;
 
                                 log("message $unreadCount");
-                                // final relativeTime = timeStamp != null
-                                //     ? timeago.format(timeStamp.toDate())
-                                //     : '';
 
-                                log("message ${chatProvider.users.firstWhere((user) => user.email == otherUserEmail, orElse: () => UserModel(id: '', name: 'Unknown', email: otherUserEmail, image: ''))}");
+                                log(
+                                  "message ${chatProvider.users.firstWhere(
+                                    (user) => user.email == otherUserEmail,
+                                    orElse: () => UserModel(
+                                        id: '',
+                                        name: 'Unknown',
+                                        email: otherUserEmail,
+                                        image: ''),
+                                  )}",
+                                );
 
                                 // Retrieve user information from ChatProvider
                                 var otherUser = chatProvider.users.firstWhere(
                                   (user) => user.email == otherUserEmail,
                                   orElse: () => UserModel(
-                                      id: '',
-                                      name: 'Unknown',
-                                      email: otherUserEmail,
-                                      image: ''), // Default user
+                                    id: '',
+                                    name: 'Unknown',
+                                    email: otherUserEmail,
+                                    image: '',
+                                  ), // Default user
                                 );
 
                                 log("message ${otherUser.image}");
                                 return ListTile(
-                                  leading: CircleAvatar(
-                                    backgroundImage: NetworkImage(otherUser
-                                        .image), // Assuming image is a URL
-                                  ),
+                                  leading: otherUser.image.isNotEmpty &&
+                                          otherUser.image != ''
+                                      ? CircleAvatar(
+                                          backgroundImage:
+                                              NetworkImage(otherUser.image),
+                                        )
+                                      : const CircleAvatar(
+                                          child: Center(
+                                            child: Icon(Icons.question_mark),
+                                          ),
+                                        ),
                                   title: TextWidget(
                                       text: otherUser.name,
                                       size: 14.0,
@@ -156,7 +173,9 @@ class ChatListScreen extends StatelessWidget {
                   ],
                 ),
               )
-            : const NoUserWidget(),
+            : const NoUserWidget(
+                title: 'Required Login',
+              ),
       ),
     );
   }

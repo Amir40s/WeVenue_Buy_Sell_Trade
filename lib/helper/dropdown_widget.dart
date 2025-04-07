@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class CustomDropdown extends StatelessWidget {
+  const CustomDropdown({super.key});
+
   @override
   Widget build(BuildContext context) {
     var dropdownModel = Provider.of<DropdownProvider>(context,listen: false);

@@ -30,7 +30,7 @@ class AccountProvider extends ChangeNotifier{
 
   Future<void> fetchUserProfile() async {
     final uid = auth.currentUser?.uid;
-    log("UID: ${uid}");
+    log("UID: $uid");
     try {
       final value = await firestore.collection(DbKey.c_users).doc(uid).get();
       if (value.exists) {

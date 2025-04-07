@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +12,7 @@ class CustomRichtext extends StatelessWidget {
     return RichText(
         text: TextSpan(
       text: firstText,
-      style:  TextStyle(color: Colors.black,),
+      style:  const TextStyle(color: Colors.black,),
       children: <InlineSpan>[
         const WidgetSpan(
             alignment: PlaceholderAlignment.baseline,

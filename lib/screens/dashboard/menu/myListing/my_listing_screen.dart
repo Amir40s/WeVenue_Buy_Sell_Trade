@@ -4,7 +4,6 @@ import 'package:biouwa/helper/text_widget.dart';
 import 'package:biouwa/model/product/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/utils.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../helper/simple_header.dart';
@@ -25,23 +24,23 @@ class MyListingScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SimpleHeader(),
-                SizedBox(height: 40.0,),
+                const SimpleHeader(),
+                const SizedBox(height: 40.0,),
                 TextWidget(text: "My Listing", size: 22.0,color: Colors.black,isBold: true,),
-                SizedBox(height: 40.0,),
+                const SizedBox(height: 40.0,),
                 Consumer<ProductProvider>(
                   builder: (context, productProvider, child) {
                     return StreamBuilder<List<ProductModel>>(
                       stream: productProvider.getMyProducts(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(child: CircularProgressIndicator());
                         }
                         if (snapshot.hasError) {
                           return Center(child: Text('Error: ${snapshot.error}'));
                         }
                         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                          return Center(child: Text('No products found'));
+                          return const Center(child: Text('No products found'));
                         }
 
                         List<ProductModel> products = snapshot.data!;
@@ -141,7 +140,7 @@ class MyListingScreen extends StatelessWidget {
           subtitle: TextWidget(text: "\$${products.cost}",size: 14.0,isBold: true,color: primaryColor,),
           trailing: Column(
             children: [
-              IconButton(icon: Icon(Icons.delete,color: Colors.red,size: 24,),onPressed: (){
+              IconButton(icon: const Icon(Icons.delete,color: Colors.red,size: 24,),onPressed: (){
 
                 customDialog(
                     onClick: () async{

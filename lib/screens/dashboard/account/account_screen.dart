@@ -18,16 +18,46 @@ import '../../../helper/no_user_widget.dart';
 import '../../../provider/constant/value_provider.dart';
 import '../../../provider/data/image_provider.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   final String type;
-  String image;
+  final String image;
 
-  AccountScreen({super.key, required this.type, this.image = ""});
+  AccountScreen({
+    super.key,
+    required this.type,
+    this.image = "",
+  });
 
-  var nameController = TextEditingController();
-  var emailController = TextEditingController();
-  var phoneController = TextEditingController();
-  var addressController = TextEditingController();
+  @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  late TextEditingController nameController;
+  late TextEditingController emailController;
+  late TextEditingController phoneController;
+  late TextEditingController addressController;
+
+  @override
+  void initState() {
+    super.initState();
+    final accountProvider =
+        Provider.of<AccountProvider>(context, listen: false);
+
+    nameController = TextEditingController(text: accountProvider.name);
+    emailController = TextEditingController(text: accountProvider.email);
+    phoneController = TextEditingController(text: accountProvider.phone);
+    addressController = TextEditingController(text: accountProvider.address);
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +85,7 @@ class AccountScreen extends StatelessWidget {
                             height: 20.0,
                           ),
                           //back button
-                          if (type == "edit")
+                          if (widget.type == "edit")
                             GestureDetector(
                               onTap: () {
                                 Get.back();
@@ -91,7 +121,7 @@ class AccountScreen extends StatelessWidget {
                           const SizedBox(
                             height: 20.0,
                           ),
-                          if (type == "edit")
+                          if (widget.type == "edit")
                             Consumer<ImagePickProvider>(
                               builder: (context, prov, child) {
                                 return GestureDetector(
@@ -114,14 +144,15 @@ class AccountScreen extends StatelessWidget {
                                           child: CircleAvatar(
                                             radius: 50.0,
                                             child: ImageLoaderWidget(
-                                              imageUrl: image,
+                                              imageUrl: widget.image,
                                             ),
-                                          )),
+                                          ),
+                                        ),
                                 );
                               },
                             ),
 
-                          if (type == "bottom")
+                          if (widget.type == "bottom")
                             accountProvider.image != ""
                                 ? Align(
                                     alignment: AlignmentDirectional.center,
@@ -130,7 +161,8 @@ class AccountScreen extends StatelessWidget {
                                       backgroundImage: NetworkImage(
                                           accountProvider.image.toString()),
                                       // child: ImageLoaderWidget(imageUrl: accountProvider.image.toString() ,),
-                                    ))
+                                    ),
+                                  )
                                 : const Align(
                                     alignment: AlignmentDirectional.center,
                                     child: CircleAvatar(
@@ -139,14 +171,16 @@ class AccountScreen extends StatelessWidget {
                                       backgroundImage: AssetImage(
                                           "assets/icons/ic_profile_image.webp"),
                                       // child: ImageLoaderWidget(imageUrl: accountProvider.image.toString() ,),
-                                    )),
+                                    ),
+                                  ),
                           Align(
-                              alignment: AlignmentDirectional.center,
-                              child: TextWidget(
-                                text: "My Account",
-                                size: 18.0,
-                                isBold: true,
-                              )),
+                            alignment: AlignmentDirectional.center,
+                            child: TextWidget(
+                              text: "My Account",
+                              size: 18.0,
+                              isBold: true,
+                            ),
+                          ),
 
                           const SizedBox(
                             height: 20.0,
@@ -207,26 +241,27 @@ class AccountScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10.0,
                           ),
-                          TextWidget(
-                            text: "Address",
-                            size: 14.0,
-                            isBold: true,
-                          ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          ReInputField(
-                              hintText: addressController.text =
-                                  accountProvider.address.toString(),
-                              controller: addressController,
-                              prefixPath: "",
-                              isPrefix: false),
+                          // TextWidget(
+                          //   text: "Address",
+                          //   size: 14.0,
+                          //   isBold: true,
+                          // ),
+                          // const SizedBox(
+                          //   height: 10.0,
+                          // ),
+                          // ReInputField(
+                          //   hintText: addressController.text =
+                          //       accountProvider.address.toString(),
+                          //   controller: addressController,
+                          //   prefixPath: "",
+                          //   isPrefix: false,
+                          // ),
 
                           const SizedBox(
                             height: 40.0,
                           ),
 
-                          if (type == "bottom")
+                          if (widget.type == "bottom")
                             GestureDetector(
                               onTap: () {
                                 Get.to(() => const SettingScreen());
@@ -265,7 +300,7 @@ class AccountScreen extends StatelessWidget {
                             height: 40.0,
                           ),
 
-                          if (type == "edit")
+                          if (widget.type == "edit")
                             Consumer<ValueProvider>(
                               builder: (context, provider, child) {
                                 return provider.isLoading == false

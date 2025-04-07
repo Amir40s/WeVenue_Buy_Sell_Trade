@@ -1,15 +1,12 @@
 import 'package:biouwa/db_key.dart';
 import 'package:biouwa/provider/constant/value_provider.dart';
-import 'package:biouwa/screens/dashboard/dashboard_screen.dart';
 import 'package:biouwa/screens/login/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant.dart';
-import '../../constant/appString/app_string.dart';
 import '../../screens/bottom_bar/bottom_bar_screen.dart';
 
 class FirebaseDataProvider extends ChangeNotifier {

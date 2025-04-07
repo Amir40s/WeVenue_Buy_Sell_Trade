@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 class OrderProgressIndicator extends StatelessWidget {
   final double progress;
 
-  const OrderProgressIndicator({Key? key, required this.progress})
-      : super(key: key);
+  const OrderProgressIndicator({super.key, required this.progress});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class OrderProgressIndicator extends StatelessWidget {
             const SizedBox(height: 8),
             Stack(
               children: [
-                Container(
+                SizedBox(
                   height: 60,
                   child: Row(
                     children: [
@@ -41,7 +40,7 @@ class OrderProgressIndicator extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
+                SizedBox(
                   height: 60,
                   child: Row(
                     children: [

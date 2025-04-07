@@ -1,6 +1,5 @@
 import 'package:biouwa/helper/button_widget.dart';
 import 'package:biouwa/helper/custom_richtext.dart';
-import 'package:biouwa/helper/login_richtext.dart';
 import 'package:biouwa/helper/custom_textfield.dart';
 import 'package:biouwa/helper/images.dart';
 import 'package:biouwa/helper/simple_header.dart';
@@ -27,14 +26,14 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var dropDownProvider = Provider.of<DropdownProvider>(context,listen: false);
-    final _key = GlobalKey<FormState>();
+    final key = GlobalKey<FormState>();
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Form(
-            key: _key,
+            key: key,
             child: Container(
               width: Get.width,
               height: Get.height,
@@ -43,29 +42,29 @@ class SignupScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                   SimpleHeader(),
-                  SizedBox(height: 40.0,),
+                   const SimpleHeader(),
+                  const SizedBox(height: 40.0,),
                   TextWidget(text: "Sign Up",size: 22.0,isBold: true,),
 
-                  SizedBox(height: 40.0,),
+                  const SizedBox(height: 40.0,),
                   CustomTextField(hintText: "Name", controller: nameController,suffixPath: AppIcons.ic_name,),
-                  SizedBox(height: 20.0,),
+                  const SizedBox(height: 20.0,),
                   CustomTextField(hintText: "Email", controller: emailController,suffixPath: AppIcons.ic_email,),
-                  SizedBox(height: 20.0,),
+                  const SizedBox(height: 20.0,),
                   CustomTextField(hintText: "Phone", controller: phoneController,suffixPath: AppIcons.ic_phone,
                   keyboardType: TextInputType.number,),
-                  SizedBox(height: 20.0,),
-                  CustomDropdown(),
-                  SizedBox(height: 20.0,),
+                  const SizedBox(height: 20.0,),
+                  const CustomDropdown(),
+                  const SizedBox(height: 20.0,),
                   CustomPasswordTextField(hintText: "Password", controller: passwordController,suffixPath: AppIcons.ic_password_visible, obscurePassword: _obscurePassword,),
 
-                  SizedBox(height: 40.0,),
+                  const SizedBox(height: 40.0,),
                   Consumer<ValueProvider>(
                     builder: (context,provider,index){
                       return provider.isLoading == false ? ButtonWidget(
                           text: "Create Account",
                           onClicked: (){
-                            if(_key.currentState!.validate()){
+                            if(key.currentState!.validate()){
                               provider.setLoading(true);
                               Provider.of<FirebaseDataProvider>(context,listen: false)
                                   .createUserAccount(
@@ -82,7 +81,7 @@ class SignupScreen extends StatelessWidget {
                     },
                   ),
 
-                  SizedBox(height: 30.0,),
+                  const SizedBox(height: 30.0,),
                   CustomRichtext(press: (){
                     Get.to(LoginScreen());
                   }, firstText: "Already have an account?", secondText: "Log In"),

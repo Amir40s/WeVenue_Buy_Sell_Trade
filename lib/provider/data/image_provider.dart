@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -78,17 +77,15 @@ class ImagePickProvider extends ChangeNotifier {
 
 
   Future<void> pickImages() async {
-    final List<XFile>? selectedImages = await _picker.pickMultiImage();
-    if (selectedImages != null) {
-      _images = selectedImages;
-      notifyListeners();
+    final List<XFile> selectedImages = await _picker.pickMultiImage();
+    _images = selectedImages;
+    notifyListeners();
     }
-  }
 
   Future<void> uploadImages(BuildContext context) async {
     if (_images == null || _images!.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('No images selected')),
+        const SnackBar(content: Text('No images selected')),
       );
       return;
     }

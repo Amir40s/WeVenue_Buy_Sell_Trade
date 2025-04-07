@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../constant.dart';
@@ -13,7 +12,7 @@ class BorderButtonWidget extends StatelessWidget {
   double radius;
 
   BorderButtonWidget({
-    Key? key,
+    super.key,
     required this.text,
     required this.onClicked,
     required this.width,
@@ -23,7 +22,7 @@ class BorderButtonWidget extends StatelessWidget {
      this.borderColor = primaryColor,
      this.isShadow = true,
      this.loadingMesasge = "Loading.."
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) =>

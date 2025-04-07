@@ -1,6 +1,5 @@
 import 'package:biouwa/constant.dart';
 import 'package:biouwa/helper/button_widget.dart';
-import 'package:biouwa/helper/simple_header.dart';
 import 'package:biouwa/helper/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,6 +10,8 @@ import '../../helper/images.dart';
 import '../../provider/cart/cart_provider.dart';
 import '../checkout/checkout_screen.dart';
 class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +43,7 @@ class CartScreen extends StatelessWidget {
               ],
             ),
 
-                SizedBox(height: 30.0,),
+                const SizedBox(height: 30.0,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,7 +52,7 @@ class CartScreen extends StatelessWidget {
                     TextWidget(text: "Total: \$${cartProvider.totalAmount.toStringAsFixed(2)}", size: 20.0,isBold: true),
                   ],
                 ),
-                SizedBox(height: 30.0,),
+                const SizedBox(height: 30.0,),
                 Column(
                   children: [
                    cartProvider.items.isNotEmpty  ?  ListView.builder(
@@ -62,13 +63,13 @@ class CartScreen extends StatelessWidget {
                         return
                         Container(
                           width: Get.width,
-                          margin: EdgeInsets.only(bottom: 10.0),
+                          margin: const EdgeInsets.only(bottom: 10.0),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: ListTile(
-                            leading:  Container(
+                            leading:  SizedBox(
                                     width: 50.0,
                                 height: 50.0,
                                 child: ImageLoaderWidget(imageUrl: cartItem.product.image,)),
@@ -78,14 +79,14 @@ class CartScreen extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 IconButton(
-                                  icon: Icon(Icons.remove),
+                                  icon: const Icon(Icons.remove),
                                   onPressed: () {
                                     cartProvider.removeProduct(cartItem.product);
                                   },
                                 ),
                                 Text(cartItem.quantity.toString()),
                                 IconButton(
-                                  icon: Icon(Icons.add),
+                                  icon: const Icon(Icons.add),
                                   onPressed: () {
                                     cartProvider.addProduct(cartItem.product);
                                   },

@@ -11,11 +11,11 @@ import '../../screens/dashboard/dashboard_screen.dart';
 class BottomBarProvider with ChangeNotifier {
   int _myIndex = 0;
   List<Widget> _myList = [
-    DashboardScreen(),
+    const DashboardScreen(),
     const ChatListScreen(),
     RelocationScreen(),
     AccountScreen(type: 'bottom'),
-    DashboardScreen(),
+    const DashboardScreen(),
   ];
 
   BottomBarProvider() {

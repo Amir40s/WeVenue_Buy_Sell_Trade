@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant.dart';
@@ -23,7 +22,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           child: Container(
             width: Get.width,
             height: Get.height,
@@ -34,21 +33,21 @@ class ForgotPasswordScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                   SimpleHeader(),
-                  SizedBox(height: 40.0,),
+                   const SimpleHeader(),
+                  const SizedBox(height: 40.0,),
                   TextWidget(text: "Forgot Password",size: 24.0,isBold: true,),
               
               
-                  SizedBox(height: 40.0,),
+                  const SizedBox(height: 40.0,),
                   Padding(
                     padding: const EdgeInsets.all(30.0),
                     child: TextWidget(text: "please enter the email address associated with your account",size: 12.0,isBold: false,color: lightBlue,textAlignment: TextAlign.center,),
                   ),
               
-                  SizedBox(height: 40.0,),
+                  const SizedBox(height: 40.0,),
                   CustomTextField(hintText: "Email", controller: emailController,suffixPath: AppIcons.ic_email,),
               
-                  SizedBox(height: 80.0,),
+                  const SizedBox(height: 80.0,),
                   Consumer<ValueProvider>(
                     builder: (context, provider, child){
                       return provider.isLoading == false  ? ButtonWidget(text: "Reset Password", onClicked: (){

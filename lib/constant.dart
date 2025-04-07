@@ -1,14 +1,10 @@
-import 'dart:ui';
 
-import 'package:biouwa/db_key.dart';
 import 'package:biouwa/provider/constant/value_provider.dart';
 import 'package:biouwa/screens/login/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 
 const primaryColor = Color(0xFFC11C84);
@@ -107,12 +103,12 @@ void showReAuthDialog(BuildContext context) {
     title: "Re-authenticate",
     content: Column(
       children: [
-        Text("Enter your password to continue."),
+        const Text("Enter your password to continue."),
         const SizedBox(height: 10),
         TextField(
           controller: passwordController,
           obscureText: true,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             border: OutlineInputBorder(),
             hintText: "Enter password",
           ),

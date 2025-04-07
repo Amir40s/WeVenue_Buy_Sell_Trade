@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 import 'package:biouwa/model/product/product_model.dart';
 
@@ -12,7 +11,7 @@ import '../../provider/products/products_provider.dart';
 import '../productDetail/product_details_screen.dart';
 
 class SaveItemsScreen extends StatelessWidget {
-  const SaveItemsScreen({Key? key}) : super(key: key);
+  const SaveItemsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +27,10 @@ class SaveItemsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SimpleHeader(),
-                SizedBox(height: 40.0,),
+                const SimpleHeader(),
+                const SizedBox(height: 40.0,),
                 TextWidget(text: "Saved Items", size: 22.0,color: Colors.black,isBold: true,),
-                SizedBox(height: 40.0,),
+                const SizedBox(height: 40.0,),
                 StreamBuilder<List<ProductModel>>(
                   stream: productProvider.getSavedProducts(),
                   builder: (context, snapshot) {
@@ -71,7 +70,7 @@ class SaveItemsScreen extends StatelessWidget {
           subtitle: TextWidget(text: "\$${products.cost}",size: 14.0,isBold: true,color: primaryColor,),
           trailing: Column(
             children: [
-              IconButton(icon: Icon(Icons.delete,color: Colors.red,size: 24,),onPressed: (){
+              IconButton(icon: const Icon(Icons.delete,color: Colors.red,size: 24,),onPressed: (){
 
                 customDialog(
                     onClick: () async{
