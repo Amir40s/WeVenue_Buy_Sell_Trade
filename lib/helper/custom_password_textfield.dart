@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class CustomPasswordTextField extends StatelessWidget {
   final String hintText;
+  final String? error;
   final TextEditingController controller;
   bool isSuffix = false;
   final obscurePassword;
@@ -20,6 +21,7 @@ class CustomPasswordTextField extends StatelessWidget {
     this.suffixPath,
     this.callback,
     required this.obscurePassword,
+    this.error,
   });
 
   @override
@@ -35,7 +37,8 @@ class CustomPasswordTextField extends StatelessWidget {
                     const TextStyle(fontSize: 12.0, color: Colors.black),
                 placeholder: hintText,
                 padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                validator: (value) => value!.isEmpty ? 'Field required' : null,
+                validator: (value) =>
+                    value!.isEmpty ? error ?? 'Field required' : null,
                 style: const TextStyle(fontSize: 12.0, color: Colors.black),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade300,

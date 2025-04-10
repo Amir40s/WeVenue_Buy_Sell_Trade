@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:biouwa/constant/appString/app_string.dart';
 import 'package:biouwa/helper/button_widget.dart';
 import 'package:biouwa/helper/custom_richtext.dart';
 import 'package:biouwa/helper/custom_textfield.dart';
@@ -86,6 +87,7 @@ class LoginScreen extends StatelessWidget {
                           hintText: "Email",
                           controller: emailController,
                           suffixPath: AppIcons.ic_email,
+                          error: '${AppString.fieldError}Email',
                         ),
                         const SizedBox(
                           height: 20.0,
@@ -93,8 +95,10 @@ class LoginScreen extends StatelessWidget {
                         CustomPasswordTextField(
                           hintText: "Password",
                           controller: passwordController,
+
                           suffixPath: AppIcons.ic_password_visible,
                           obscurePassword: _obscurePassword,
+                          error:'Enter your password'
                         ),
                         const SizedBox(
                           height: 10.0,

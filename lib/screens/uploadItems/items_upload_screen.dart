@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:biouwa/constant/appString/app_string.dart';
 import 'package:biouwa/helper/button_widget.dart';
 import 'package:biouwa/helper/custom_textfield.dart';
 import 'package:biouwa/provider/bottom_bar/bottom_bar_provider.dart';
@@ -127,6 +128,7 @@ class ItemsUploadScreen extends StatelessWidget {
                           hintText: "product title",
                           controller: titleController,
                           fillColor: Colors.white,
+                          error: '${AppString.fieldError}Title',
                         ),
                         const SizedBox(
                           height: 20.0,
@@ -139,6 +141,7 @@ class ItemsUploadScreen extends StatelessWidget {
                           hintText: "Product Description",
                           controller: descController,
                           fillColor: Colors.white,
+                          error: '${AppString.fieldError}Product Description',
                         ),
                         const SizedBox(
                           height: 20.0,
@@ -152,6 +155,7 @@ class ItemsUploadScreen extends StatelessWidget {
                           controller: costController,
                           fillColor: Colors.white,
                           keyboardType: TextInputType.number,
+                          error: '${AppString.fieldError}Delivery Cost',
                         ),
                         const SizedBox(
                           height: 40.0,

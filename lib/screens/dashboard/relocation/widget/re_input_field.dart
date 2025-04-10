@@ -16,11 +16,12 @@ class ReInputField extends StatelessWidget {
     required this.prefixPath,
     this.isPrefix = true,
   });
+
   final isIos = Platform.isIOS;
 
   @override
   Widget build(BuildContext context) {
-    return !isIos
+    return isIos
         ? CupertinoTextField(
             controller: controller,
             cursorColor: Colors.black,

@@ -287,11 +287,96 @@ class ChatScreen extends StatelessWidget {
       : super(key: key);
 
   final List<String> badWords = [
+    // Mild
     "hell",
+    "damn",
     "idiot",
-    "shutup",
+    "stupid",
+    "shut up",
+
+    // Strong/profane
     "fuck",
     "fucked",
+    "fucker",
+    "motherfucker",
+    "mf",
+    "bitch",
+    "bastard",
+    "asshole",
+    "dick",
+    "dickhead",
+    "cock",
+    "pussy",
+    "slut",
+    "whore",
+    "cunt",
+
+    // Sexually explicit
+    "sex",
+    "anal",
+    "oral",
+    "blowjob",
+    "handjob",
+    "porn",
+    "nude",
+    "nudes",
+    "horny",
+    "boobs",
+    "tits",
+    "vagina",
+    "penis",
+    "cum",
+    "suck",
+    "bang",
+    "jerk off",
+    "masturbate",
+
+    // Hate speech or racism
+    "nigger",
+    "nigga",
+    "chink",
+    "spic",
+    "kike",
+    "fag",
+    "faggot",
+    "tranny",
+    "retard",
+
+    // Self-harm/suicide trigger words (App Store sometimes flags these)
+    "kill myself",
+    "suicide",
+    "cutting",
+    "hang myself",
+    "die alone",
+
+    // Threats
+    "i'll kill you",
+    "go die",
+    "i’ll hurt you",
+
+    // Drug references
+    "weed",
+    "marijuana",
+    "cocaine",
+    "meth",
+    "heroin",
+    "ecstasy",
+    "lsd",
+    "shrooms",
+
+    // Gambling
+    "casino",
+    "betting",
+    "lottery",
+
+    // Others
+    "ass",
+    "arse",
+    "screw you",
+    "crap",
+    "shit",
+    "bullshit",
+    "goddamn",
   ];
 
   bool containsBadWords(String message) {
@@ -317,7 +402,9 @@ class ChatScreen extends StatelessWidget {
                 stream: context.read<ChatProvider>().getMessages(chatRoomId),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   }
                   provider.markMessageAsRead(chatRoomId);
                   provider.updateDeliveryStatus(chatRoomId);

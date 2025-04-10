@@ -5,10 +5,12 @@ import 'package:biouwa/helper/no_user_widget.dart';
 import 'package:biouwa/helper/text_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant.dart';
+import '../../helper/images.dart';
 import '../../model/message/chatroom_model.dart';
 import '../../model/message/user_model.dart';
 import '../../provider/bottom_bar/bottom_bar_provider.dart';
@@ -173,10 +175,40 @@ class ChatListScreen extends StatelessWidget {
                   ],
                 ),
               )
-            : const NoUserWidget(
-                title: 'Required Login',
-              ),
+            : const NoUserWidget(title: 'Required Login'),
       ),
+    );
+  }
+}
+
+
+class CurrentlyUnavailable extends StatelessWidget {
+  const CurrentlyUnavailable({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SvgPicture.asset(
+          Images.noData,
+          height: Get.height * 0.35,
+        ),
+        const SizedBox(height: 24),
+        TextWidget(
+          text: 'Currently unavailable',
+          size: 18,
+          isBold: true,
+        ),
+        const SizedBox(height: 8),
+        TextWidget(
+          text:
+              'It looks like you’re not logged in or don’t have an account yet.',
+          size: 14,
+          color: Colors.grey,
+          textAlignment: TextAlign.center,
+        ),
+        SizedBox(height: Get.height * 0.05)
+      ],
     );
   }
 }

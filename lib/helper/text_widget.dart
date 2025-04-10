@@ -38,6 +38,7 @@ class TextWidget extends StatelessWidget {
         fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
         fontStyle: italic ? FontStyle.italic : FontStyle.normal,
         fontFamily: fontFamily,
+        decoration: TextDecoration.none
       ),
       textAlign: textAlignment,
     );

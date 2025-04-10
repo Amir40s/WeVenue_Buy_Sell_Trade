@@ -15,16 +15,19 @@ class CustomTextField extends StatelessWidget {
   final Color fillColor;
   final VoidCallback? callback;
   final TextInputType keyboardType;
+  final String? error;
 
-  const CustomTextField(
-      {super.key,
-      required this.hintText,
-      required this.controller,
-      this.isSuffix = false,
-      this.suffixPath,
-      this.fillColor = customGrey,
-      this.callback,
-      this.keyboardType = TextInputType.text});
+  const CustomTextField({
+    super.key,
+    required this.hintText,
+    required this.controller,
+    this.isSuffix = false,
+    this.suffixPath,
+    this.fillColor = customGrey,
+    this.callback,
+    this.keyboardType = TextInputType.text,
+    this.error,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,8 @@ class CustomTextField extends StatelessWidget {
             obscureText: false,
             placeholder: hintText,
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-            validator: (value) => value!.isEmpty ? 'Field is required' : null,
+            validator: (value) =>
+                value!.isEmpty ? error ?? 'Field is required' : null,
             decoration: BoxDecoration(
               color: Colors.grey.shade300,
               borderRadius: BorderRadius.circular(20.0),
