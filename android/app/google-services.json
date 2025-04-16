@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "827103172443",
-    "project_id": "wevenue-f9502",
-    "storage_bucket": "wevenue-f9502.appspot.com"
+    "project_number": "997689278256",
+    "project_id": "wevenue-aa298",
+    "storage_bucket": "wevenue-aa298.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:827103172443:android:e1573b9697166881fa6c7e",
+        "mobilesdk_app_id": "1:997689278256:android:c3ba84e4f7ffa4845052f5",
         "android_client_info": {
           "package_name": "com.solinovation.biouwa"
         }
@@ -15,7 +15,26 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDly9oDk9NWM6n6fhWZcaQUT95NDPHY4kQ"
+          "current_key": "AIzaSyB-tdkOp0sclBHsBFS-WizlED6b4hW9RE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997689278256:android:336b466819bc0f575052f5",
+        "android_client_info": {
+          "package_name": "com.wevenue.wevenue"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-tdkOp0sclBHsBFS-WizlED6b4hW9RE0"
         }
       ],
       "services": {

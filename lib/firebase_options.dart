@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDly9oDk9NWM6n6fhWZcaQUT95NDPHY4kQ',
-    appId: '1:827103172443:android:e1573b9697166881fa6c7e',
-    messagingSenderId: '827103172443',
-    projectId: 'wevenue-f9502',
-    storageBucket: 'wevenue-f9502.appspot.com',
+    apiKey: 'AIzaSyB-tdkOp0sclBHsBFS-WizlED6b4hW9RE0',
+    appId: '1:997689278256:android:c3ba84e4f7ffa4845052f5',
+    messagingSenderId: '997689278256',
+    projectId: 'wevenue-aa298',
+    storageBucket: 'wevenue-aa298.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCMx7zq6s6jV51uDn_9MCVNqQWOtNCw7sk',
-    appId: '1:827103172443:ios:10d04be478e5d916fa6c7e',
-    messagingSenderId: '827103172443',
-    projectId: 'wevenue-f9502',
-    storageBucket: 'wevenue-f9502.appspot.com',
+    apiKey: 'AIzaSyDkEzA7RAGXnOY1HmDSHlOln3orN5jQXgc',
+    appId: '1:997689278256:ios:eeda33257c131a575052f5',
+    messagingSenderId: '997689278256',
+    projectId: 'wevenue-aa298',
+    storageBucket: 'wevenue-aa298.firebasestorage.app',
     iosBundleId: 'com.solinovation.biouwa',
   );
 
