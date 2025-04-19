@@ -95,14 +95,11 @@ class LoginScreen extends StatelessWidget {
                         CustomPasswordTextField(
                           hintText: "Password",
                           controller: passwordController,
-
                           suffixPath: AppIcons.ic_password_visible,
                           obscurePassword: _obscurePassword,
-                          error:'Enter your password'
+                          error: 'Enter your password',
                         ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
+                        const SizedBox(height: 10.0),
                         GestureDetector(
                           onTap: () {
                             Get.to((ForgotPasswordScreen()));

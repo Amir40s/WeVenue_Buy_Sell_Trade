@@ -1,4 +1,3 @@
-
 import 'package:biouwa/provider/constant/value_provider.dart';
 import 'package:biouwa/screens/login/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,7 +18,8 @@ const lightGrey = Color(0xFFE2E8F0);
 const darkGrey = Color(0xFF534F5D);
 const lightBlue = Colors.lightBlue;
 const Color customGrey = Color(0xFFE0E0E0);
-
+final double appW = Get.width;
+final double appH = Get.height;
 LinearGradient gradientColor = const LinearGradient(colors: [
   Color(0xff0fabaa),
   Color(0xff3EC2C2),
@@ -125,7 +125,8 @@ void showReAuthDialog(BuildContext context) {
   );
 }
 
-Future<void> reAuthenticateAndDelete(BuildContext context, String password) async {
+Future<void> reAuthenticateAndDelete(
+    BuildContext context, String password) async {
   try {
     User? user = auth.currentUser;
 
@@ -203,6 +204,7 @@ Future<void> deleteAccount({required BuildContext context}) async {
     Provider.of<ValueProvider>(context, listen: false).setLoading(false);
   }
 }
+
 customDialog(
     {required VoidCallback onClick,
     required title,

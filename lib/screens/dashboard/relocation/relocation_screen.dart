@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../../../helper/images.dart';
 import '../../../helper/no_user_widget.dart';
 
 class RelocationScreen extends StatelessWidget {
@@ -68,7 +67,7 @@ class RelocationScreen extends StatelessWidget {
                       ReInputField(
                         hintText: "From",
                         controller: fromController,
-                        prefixPath: AppIcons.ic_arrow_forward,
+                        // prefixPath: AppIcons.ic_arrow_forward,
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -76,7 +75,7 @@ class RelocationScreen extends StatelessWidget {
                       ReInputField(
                         hintText: "To",
                         controller: toController,
-                        prefixPath: AppIcons.ic_location,
+                        // prefixPath: AppIcons.ic_location,
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -84,7 +83,7 @@ class RelocationScreen extends StatelessWidget {
                       ReInputField(
                         hintText: "Departure Date",
                         controller: dateController,
-                        prefixPath: AppIcons.ic_calender,
+                        // prefixPath: AppIcons.ic_calender,
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -92,7 +91,7 @@ class RelocationScreen extends StatelessWidget {
                       ReInputField(
                         hintText: "Types of relocation",
                         controller: typesController,
-                        prefixPath: AppIcons.ic_type,
+                        // prefixPath: AppIcons.ic_type,
                       ),
                       const SizedBox(
                         height: 10.0,
@@ -100,7 +99,7 @@ class RelocationScreen extends StatelessWidget {
                       ReInputField(
                         hintText: "Departure Clock",
                         controller: timeController,
-                        prefixPath: AppIcons.ic_clock,
+                        // prefixPath: AppIcons.ic_clock,
                       ),
                       const SizedBox(
                         height: 20.0,

@@ -51,12 +51,8 @@ class CustomPasswordTextField extends StatelessWidget {
                 cursorColor: Colors.black,
                 obscureText: obscurePassword.value,
                 obscuringCharacter: '*',
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'field required';
-                  }
-                  return null;
-                },
+                validator: (value) =>
+                    value!.isEmpty ? error ?? 'Field required' : null,
                 decoration: InputDecoration(
                   hintText: hintText,
                   filled: true,

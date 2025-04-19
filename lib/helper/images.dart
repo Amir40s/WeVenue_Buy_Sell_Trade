@@ -33,4 +33,5 @@ class AppIcons {
   static const ic_home = "assets/icons/ic_home.webp";
   static const ic_relocation = "assets/icons/ic_relocation.webp";
   static const ic_delete = "assets/icons/ic_delete.svg";
+  static const ic_user = "assets/icons/ic_user.svg";
 }

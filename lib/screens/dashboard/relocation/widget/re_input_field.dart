@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 class ReInputField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
-  final String prefixPath;
-  bool isPrefix;
+  final Widget? prefix;
+  final bool enabled;
 
   ReInputField({
     super.key,
     required this.hintText,
     required this.controller,
-    required this.prefixPath,
-    this.isPrefix = true,
+    this.enabled = true,
+    this.prefix,
   });
 
   final isIos = Platform.isIOS;
@@ -45,18 +45,11 @@ class ReInputField extends StatelessWidget {
               }
               return null;
             },
+            enabled: enabled,
             decoration: InputDecoration(
               hintText: hintText,
               filled: true,
-              prefixIcon: Container(
-                margin: const EdgeInsets.only(right: 5.0),
-                padding: const EdgeInsets.all(8.0),
-                child: isPrefix
-                    ? Image.asset(prefixPath, width: 20.0, height: 20.0)
-                    : const SizedBox(
-                        width: 0.5,
-                      ),
-              ),
+              prefixIcon: prefix,
               fillColor: Colors.white,
               hintStyle: const TextStyle(fontSize: 12.0, color: Colors.black),
               enabledBorder: OutlineInputBorder(
@@ -66,6 +59,10 @@ class ReInputField extends StatelessWidget {
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.0),
                 borderSide: const BorderSide(color: Colors.white, width: 2.0),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                borderSide: const BorderSide(color: Colors.white),
               ),
             ),
           );

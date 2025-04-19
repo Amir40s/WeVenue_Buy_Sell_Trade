@@ -51,12 +51,8 @@ class CustomTextField extends StatelessWidget {
         : TextFormField(
             controller: controller,
             cursorColor: Colors.black,
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Field is required';
-              }
-              return null;
-            },
+            validator: (value) =>
+                value!.isEmpty ? error ?? 'Field is required' : null,
             keyboardType: keyboardType,
             decoration: InputDecoration(
               hintText: hintText,

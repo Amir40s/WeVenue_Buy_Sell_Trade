@@ -91,14 +91,14 @@ class SettingScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20.0,
                 ),
-                CustomListTile(
-                    icon: AppIcons.ic_orders,
-                    title: "My orders",
-                    subtitle: "view all your order",
-                    press: () {}),
-                const SizedBox(
-                  height: 20.0,
-                ),
+                // CustomListTile(
+                //     icon: AppIcons.ic_orders,
+                //     title: "My orders",
+                //     subtitle: "view all your order",
+                //     press: () {}),
+                // const SizedBox(
+                //   height: 20.0,
+                // ),
                 CustomListTile(
                     icon: AppIcons.ic_faq,
                     title: "FAQ",
