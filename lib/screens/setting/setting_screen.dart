@@ -9,7 +9,6 @@ import 'package:biouwa/provider/account/account_provider.dart';
 import 'package:biouwa/screens/dashboard/account/account_screen.dart';
 import 'package:biouwa/screens/dashboard/menu/moveServices/move_services.dart';
 import 'package:biouwa/screens/dashboard/menu/myListing/my_listing_screen.dart';
-import 'package:biouwa/screens/saveItems/save_items_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -78,16 +77,16 @@ class SettingScreen extends StatelessWidget {
                     press: () {
                       Get.to(() => const MyListingScreen());
                     }),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                CustomListTile(
-                    icon: AppIcons.ic_layers,
-                    title: "Saved Items",
-                    subtitle: "See your wishlist products",
-                    press: () {
-                      Get.to(() => const SaveItemsScreen());
-                    }),
+                // const SizedBox(
+                //   height: 20.0,
+                // ),
+                // CustomListTile(
+                //     icon: AppIcons.ic_layers,
+                //     title: "Saved Items",
+                //     subtitle: "See your wishlist products",
+                //     press: () {
+                //       Get.to(() => const SaveItemsScreen());
+                //     }),
                 const SizedBox(
                   height: 20.0,
                 ),
@@ -145,7 +144,7 @@ class SettingScreen extends StatelessWidget {
                                 CupertinoDialogAction(
                                   child: const Text("Yes"),
                                   onPressed: () {
-                                    logout(); // Your logout logic here
+                                    logout(context: context);
                                     Navigator.of(context).pop();
                                   },
                                 ),
@@ -158,7 +157,7 @@ class SettingScreen extends StatelessWidget {
                             textCancel: "No",
                             textConfirm: "Yes",
                             onConfirm: () {
-                              logout();
+                              logout(context: context);
                             },
                           );
                   },

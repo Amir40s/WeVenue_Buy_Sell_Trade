@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class OrderProgressIndicator extends StatelessWidget {
   final double progress;
 
@@ -7,83 +8,80 @@ class OrderProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Complete your order — ${(progress * 100).toInt()}%'),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Stack(
-              children: [
-                SizedBox(
-                  height: 60,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 5,
-                          color: Colors.grey,
-                          width: MediaQuery.of(context).size.width * progress,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 60,
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 5,
-                        color: Colors.amber,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Complete your order — ${(progress * 100).toInt()}%'),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Stack(
+            children: [
+              SizedBox(
+                height: 60,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 4,
+                        color: Colors.grey,
                         width: MediaQuery.of(context).size.width * progress,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Positioned.fill(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _buildIcon(
-                        icon: Icons.location_on,
-                        color: Colors.amber,
-                        label: 'Shipping',
-                        progress: progress,
-                        step: 0.0,
-                      ),
-                      _buildIcon(
-                        icon: Icons.account_balance_wallet,
-                        color: Colors.grey,
-                        label: 'Payment',
-                        progress: progress,
-                        step: 0.5,
-                      ),
-                      _buildIcon(
-                        icon: Icons.verified,
-                        color: Colors.grey,
-                        label: 'Verify',
-                        progress: progress,
-                        step: 1.0,
-                      ),
-                    ],
-                  ),
+              ),
+              SizedBox(
+                height: 63,
+                child: Row(
+                  children: [
+                    Container(
+                      height: 5,
+                      color: Colors.amber,
+                      width: MediaQuery.of(context).size.width * progress,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+              Positioned.fill(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildIcon(
+                      icon: Icons.location_on,
+                      color: Colors.amber,
+                      label: 'Shipping',
+                      progress: progress,
+                      step: 0.0,
+                    ),
+                    _buildIcon(
+                      icon: Icons.account_balance_wallet,
+                      color: Colors.grey,
+                      label: 'Payment',
+                      progress: progress,
+                      step: 0.5,
+                    ),
+                    _buildIcon(
+                      icon: Icons.verified,
+                      color: Colors.grey,
+                      label: 'Verify',
+                      progress: progress,
+                      step: 1.0,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

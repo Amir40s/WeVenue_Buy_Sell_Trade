@@ -67,6 +67,7 @@ class ProductCard extends StatelessWidget {
                     child: Center(
                       child: ImageLoaderWidget(
                         imageUrl: imageurl,
+                        radius: 50,
                       ),
                     ),
                   ),

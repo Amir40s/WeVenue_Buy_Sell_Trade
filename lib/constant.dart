@@ -1,3 +1,4 @@
+import 'package:biouwa/provider/cart/cart_provider.dart';
 import 'package:biouwa/provider/constant/value_provider.dart';
 import 'package:biouwa/screens/login/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,13 +36,15 @@ void showSnackBar({required title, required subtitle}) {
   Get.snackbar(title, subtitle, colorText: Colors.black);
 }
 
-logout() {
+logout({required BuildContext context}) {
   auth.signOut().then((value) {
+    Provider.of<CartProvider>(context, listen: false).clearCart();
     Get.offAll(() => LoginScreen());
   }).catchError((e) {
     Get.offAll(() => LoginScreen());
   });
 }
+
 //
 // Future<void> deleteAccount({required BuildContext context}) async {
 //   try {

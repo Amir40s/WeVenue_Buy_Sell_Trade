@@ -5,12 +5,11 @@ import 'package:biouwa/helper/no_user_widget.dart';
 import 'package:biouwa/helper/text_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant.dart';
-import '../../helper/images.dart';
 import '../../model/message/chatroom_model.dart';
 import '../../model/message/user_model.dart';
 import '../../provider/bottom_bar/bottom_bar_provider.dart';
@@ -181,7 +180,6 @@ class ChatListScreen extends StatelessWidget {
   }
 }
 
-
 class CurrentlyUnavailable extends StatelessWidget {
   const CurrentlyUnavailable({super.key});
 
@@ -189,10 +187,10 @@ class CurrentlyUnavailable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SvgPicture.asset(
-          Images.noData,
-          height: Get.height * 0.35,
-        ),
+        // SvgPicture.asset(
+        //   Images.noData,
+        //   height: Get.height * 0.35,
+        // ),
         const SizedBox(height: 24),
         TextWidget(
           text: 'Currently unavailable',

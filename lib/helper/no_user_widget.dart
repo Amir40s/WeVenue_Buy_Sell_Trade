@@ -1,11 +1,10 @@
 import 'package:biouwa/constant.dart';
-import 'package:biouwa/helper/images.dart';
 import 'package:biouwa/helper/text_widget.dart';
 import 'package:biouwa/screens/login/login_screen.dart';
 import 'package:biouwa/screens/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class NoUserWidget extends StatelessWidget {
@@ -28,10 +27,10 @@ class NoUserWidget extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                Images.noData,
-                height: Get.height * 0.35,
-              ),
+              // SvgPicture.asset(
+              //   Images.noData,
+              //   height: Get.height * 0.35,
+              // ),
               const SizedBox(height: 24),
               TextWidget(
                 text: title ?? 'No User Found',

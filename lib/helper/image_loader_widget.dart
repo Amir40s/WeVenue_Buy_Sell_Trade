@@ -4,19 +4,25 @@ import 'package:flutter/material.dart';
 
 class ImageLoaderWidget extends StatelessWidget {
   final String imageUrl;
+  final double? radius;
 
-  const ImageLoaderWidget({super.key, required this.imageUrl});
+  const ImageLoaderWidget({super.key, required this.imageUrl, this.radius});
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: imageUrl,
-      placeholder: (context, url) => const CircularProgressIndicator(
-        color: primaryColor,
-      ),
-      errorWidget: (context, url, error) =>
-          Image.asset("assets/icons/ic_profile_image.webp"),
-      fit: BoxFit.cover,
-    );
+    return imageUrl.isEmpty || imageUrl == ''
+        ? CircleAvatar(
+            radius: radius,
+            backgroundImage: AssetImage("assets/icons/ic_profile_image.webp"),
+          )
+        : CachedNetworkImage(
+            imageUrl: imageUrl,
+            placeholder: (context, url) => const CircularProgressIndicator(
+              color: primaryColor,
+            ),
+            errorWidget: (context, url, error) =>
+                Image.asset("assets/icons/ic_profile_image.webp"),
+            fit: BoxFit.cover,
+          );
   }
 }

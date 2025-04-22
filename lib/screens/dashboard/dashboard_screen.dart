@@ -85,6 +85,7 @@ class DashboardBody extends StatelessWidget {
 
                       List<ProductModel> products = snapshot.data!;
                       return GridView.builder(
+                        physics: NeverScrollableScrollPhysics(),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2, // Number of columns

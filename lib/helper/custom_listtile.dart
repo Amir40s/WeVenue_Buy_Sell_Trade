@@ -1,7 +1,7 @@
 import 'package:biouwa/constant.dart';
 import 'package:biouwa/helper/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class CustomListTile extends StatelessWidget {
@@ -9,6 +9,7 @@ class CustomListTile extends StatelessWidget {
   final VoidCallback press;
   final double width, height;
   final double? space;
+
   const CustomListTile(
       {super.key,
       required this.icon,
@@ -31,17 +32,17 @@ class CustomListTile extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            icon.endsWith('.svg')
-                ? SvgPicture.asset(
-                    icon,
-                    width: width,
-                    height: height,
-                  )
-                : Image.asset(
-                    icon,
-                    width: width,
-                    height: height,
-                  ),
+            // icon.endsWith('.svg')
+            //     ? SvgPicture.asset(
+            //         icon,
+            //         width: width,
+            //         height: height,
+            //       )
+            //     : Image.asset(
+            //         icon,
+            //         width: width,
+            //         height: height,
+            //       ),
             SizedBox(
               width: space ?? Get.width * 0.050,
             ),
