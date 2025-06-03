@@ -64,7 +64,8 @@ class ProductCard extends StatelessWidget {
                   SizedBox(
                     width: Get.width,
                     height: Get.width * 0.300,
-                    child: Center(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
                       child: ImageLoaderWidget(
                         imageUrl: imageurl,
                         radius: 50,
@@ -90,28 +91,29 @@ class ProductCard extends StatelessWidget {
             Consumer<ProductProvider>(
               builder: (context, provider, child) {
                 return Positioned(
-                  top: 10,
-                  right: 10,
+                  top: 16,
+                  right: 16,
                   child: GestureDetector(
-                      onTap: !bottomP.isLoggedIn
-                          ? () {}
-                          : () {
-                              // Handle the button tap
-                              if (isSaved) {
-                                provider.unsaveProduct(product.docID);
-                              } else {
-                                provider.saveProduct(product.docID);
-                              }
-                            },
-                      child: isSaved
-                          ? const Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                            )
-                          : const Icon(
-                              Icons.favorite_border,
-                              color: Colors.black,
-                            )),
+                    onTap: !bottomP.isLoggedIn
+                        ? () {}
+                        : () {
+                            // Handle the button tap
+                            if (isSaved) {
+                              provider.unsaveProduct(product.docID);
+                            } else {
+                              provider.saveProduct(product.docID);
+                            }
+                          },
+                    child: isSaved
+                        ? const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          )
+                        : const Icon(
+                            Icons.favorite_border,
+                            color: Colors.black,
+                          ),
+                  ),
                 );
               },
             ),
@@ -126,12 +128,10 @@ class ProductCard extends StatelessWidget {
                         try {
                           if (isCart) {
                             showSnackBar(title: "Product Remove", subtitle: "");
-                            Provider.of<CartProvider>(context, listen: false)
-                                .removeProduct(product);
+                            Provider.of<CartProvider>(context, listen: false).removeProduct(product);
                           } else {
                             showSnackBar(title: "Product Added", subtitle: "");
-                            Provider.of<CartProvider>(context, listen: false)
-                                .addProduct(product);
+                            Provider.of<CartProvider>(context, listen: false).addProduct(product);
                           }
                         } catch (e) {
                           log("Add Cart Product Button : ${e.toString()}");
@@ -142,9 +142,8 @@ class ProductCard extends StatelessWidget {
                   width: 32,
                   decoration: const BoxDecoration(
                     shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)),
+                    borderRadius:
+                        BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
                     gradient: LinearGradient(
                       colors: [darkPurple, primaryColor],
                       begin: Alignment.topLeft,

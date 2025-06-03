@@ -55,7 +55,7 @@ class DashboardBody extends StatelessWidget {
                 height: 20.0,
               ),
               SearchField(
-                hintText: "search for books, guitar and more",
+                hintText: "Search for books, guitar and more",
                 controller: searchController,
                 suffixPath: AppIcons.ic_logo,
               ),
@@ -69,9 +69,8 @@ class DashboardBody extends StatelessWidget {
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(
-                          child: !isIOS
-                              ? const CupertinoActivityIndicator()
-                              : const CircularProgressIndicator(),
+                          child:
+                              !isIOS ? const CupertinoActivityIndicator() : const CircularProgressIndicator(),
                         );
                       }
                       if (snapshot.hasError) {
@@ -86,8 +85,7 @@ class DashboardBody extends StatelessWidget {
                       List<ProductModel> products = snapshot.data!;
                       return GridView.builder(
                         physics: NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2, // Number of columns
                           crossAxisSpacing: 10.0,
                           mainAxisSpacing: 10.0,
@@ -97,11 +95,9 @@ class DashboardBody extends StatelessWidget {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           ProductModel product = products[index];
-                          bool isInCart =
-                              cartProvider.isInCart(products[index]);
+                          bool isInCart = cartProvider.isInCart(products[index]);
                           return FutureBuilder(
-                            future:
-                                productProvider.isProductSaved(product.docID),
+                            future: productProvider.isProductSaved(product.docID),
                             builder: (context, snapshot) {
                               bool isSaved = snapshot.data ?? false;
                               return ProductCard(

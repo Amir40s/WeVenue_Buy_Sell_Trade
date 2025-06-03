@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "997689278256",
-    "project_id": "wevenue-aa298",
-    "storage_bucket": "wevenue-aa298.firebasestorage.app"
+    "project_number": "859206399227",
+    "project_id": "wevenue-buy-sell-trade",
+    "storage_bucket": "wevenue-buy-sell-trade.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:997689278256:android:c3ba84e4f7ffa4845052f5",
+        "mobilesdk_app_id": "1:859206399227:android:f6c05f47da1e719097ac5e",
         "android_client_info": {
           "package_name": "com.solinovation.biouwa"
         }
@@ -15,26 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB-tdkOp0sclBHsBFS-WizlED6b4hW9RE0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:997689278256:android:336b466819bc0f575052f5",
-        "android_client_info": {
-          "package_name": "com.wevenue.wevenue"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB-tdkOp0sclBHsBFS-WizlED6b4hW9RE0"
+          "current_key": "AIzaSyA_aET5Vxm0UEdAtfKRN0fGM8SwYM6wbv0"
         }
       ],
       "services": {

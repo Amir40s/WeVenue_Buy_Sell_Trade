@@ -82,53 +82,55 @@ class ProductDetailsBody extends StatelessWidget {
                 height: Get.width * 0.600,
                 padding: const EdgeInsets.all(20.0),
                 decoration: BoxDecoration(
+                  image: DecorationImage(image: NetworkImage(product.image), fit: BoxFit.cover),
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: Consumer<ProductProvider>(
-                  builder: (context, productProvider, child) {
-                    return StreamBuilder<List<ProductImageModel>>(
-                      stream: productProvider.getProductImages(docID: docID),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(
-                            child: isIos
-                                ? const CupertinoActivityIndicator()
-                                : const CircularProgressIndicator(),
-                          );
-                        }
-                        if (snapshot.hasError) {
-                          return Center(
-                            child: Text('Error: ${snapshot.error}'),
-                          );
-                        }
-                        if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                          return const Center(child: Text('No images found'));
-                        }
 
-                        List<ProductImageModel> images = snapshot.data!;
-
-                        return ListView.builder(
-                          itemCount: images.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            ProductImageModel image = images[index];
-                            return Container(
-                              height: 100.0,
-                              margin: const EdgeInsets.only(right: 10.0),
-                              width: Get.width / 1.4,
-                              child: ImageLoaderWidget(
-                                imageUrl: image.image,
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    );
-                  },
-                ),
+                // child: Consumer<ProductProvider>(
+                //   builder: (context, productProvider, child) {
+                //     return StreamBuilder<List<ProductImageModel>>(
+                //       stream: productProvider.getProductImages(docID: docID),
+                //       builder: (context, snapshot) {
+                //         if (snapshot.connectionState ==
+                //             ConnectionState.waiting) {
+                //           return Center(
+                //             child: isIos
+                //                 ? const CupertinoActivityIndicator()
+                //                 : const CircularProgressIndicator(),
+                //           );
+                //         }
+                //         if (snapshot.hasError) {
+                //           return Center(
+                //             child: Text('Error: ${snapshot.error}'),
+                //           );
+                //         }
+                //         if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                //           return const Center(child: Text('No images found'));
+                //         }
+                //
+                //         List<ProductImageModel> images = snapshot.data!;
+                //
+                //         return ListView.builder(
+                //           itemCount: images.length,
+                //           shrinkWrap: true,
+                //           scrollDirection: Axis.horizontal,
+                //           itemBuilder: (context, index) {
+                //             ProductImageModel image = images[index];
+                //             return Container(
+                //               height: 100.0,
+                //               margin: const EdgeInsets.only(right: 10.0),
+                //               width: Get.width / 1.4,
+                //               child: ImageLoaderWidget(
+                //                 imageUrl: image.image,
+                //               ),
+                //             );
+                //           },
+                //         );
+                //       },
+                //     );
+                //   },
+                // ),
               ),
               const SizedBox(
                 height: 20.0,
@@ -205,9 +207,7 @@ class ProductDetailsBody extends StatelessWidget {
                     Consumer<CartProvider>(
                       builder: (context, provider, child) {
                         return BorderButtonWidget(
-                          text: provider.isInCart(product)
-                              ? "Remove"
-                              : "Add to Cart",
+                          text: provider.isInCart(product) ? "Remove" : "Add to Cart",
                           width: Get.width * 0.4,
                           height: 50.0,
                           textColor: primaryColor,
@@ -215,17 +215,11 @@ class ProductDetailsBody extends StatelessWidget {
                           onClicked: () {
                             try {
                               if (provider.isInCart(product)) {
-                                showSnackBar(
-                                    title: "Product Removed", subtitle: "");
-                                Provider.of<CartProvider>(context,
-                                        listen: false)
-                                    .removeProduct(product);
+                                showSnackBar(title: "Product Removed", subtitle: "");
+                                Provider.of<CartProvider>(context, listen: false).removeProduct(product);
                               } else {
-                                showSnackBar(
-                                    title: "Product Added", subtitle: "");
-                                Provider.of<CartProvider>(context,
-                                        listen: false)
-                                    .addProduct(product);
+                                showSnackBar(title: "Product Added", subtitle: "");
+                                Provider.of<CartProvider>(context, listen: false).addProduct(product);
                               }
                             } catch (e) {
                               log("Add Cart Product Button : ${e.toString()}");

@@ -31,8 +31,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final firebaseProvider =
-        Provider.of<FirebaseDataProvider>(context, listen: false);
+    final firebaseProvider = Provider.of<FirebaseDataProvider>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SafeArea(
@@ -66,18 +65,18 @@ class LoginScreen extends StatelessWidget {
                               size: 22.0,
                               isBold: true,
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(
-                                  const BottomNavBar(),
-                                );
-                              },
-                              child: TextWidget(
-                                text: "Skip",
-                                size: 14.0,
-                                isBold: false,
-                              ),
-                            ),
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     Get.to(
+                            //       const BottomNavBar(),
+                            //     );
+                            //   },
+                            //   child: TextWidget(
+                            //     text: "Skip",
+                            //     size: 14.0,
+                            //     isBold: false,
+                            //   ),
+                            // ),
                           ],
                         ),
                         const SizedBox(
@@ -136,10 +135,8 @@ class LoginScreen extends StatelessWidget {
                                         _key.currentState!.save();
                                         provider.setLoading(true);
                                         firebaseProvider.signInWithGoogle(
-                                            email:
-                                                emailController.text.toString(),
-                                            password: passwordController.text
-                                                .toString(),
+                                            email: emailController.text.toString(),
+                                            password: passwordController.text.toString(),
                                             context: context);
                                       }
                                     },

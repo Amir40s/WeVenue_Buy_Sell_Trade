@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCMx7zq6s6jV51uDn_9MCVNqQWOtNCw7sk</string>
+	<string>AIzaSyDqozfFJTt7DaLVItfwK4Ccer5EKf7rogw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>827103172443</string>
+	<string>859206399227</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.solinovation.biouwa</string>
 	<key>PROJECT_ID</key>
-	<string>wevenue-f9502</string>
+	<string>wevenue-buy-sell-trade</string>
 	<key>STORAGE_BUCKET</key>
-	<string>wevenue-f9502.appspot.com</string>
+	<string>wevenue-buy-sell-trade.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:827103172443:ios:10d04be478e5d916fa6c7e</string>
+	<string>1:859206399227:ios:364ddbda0ba52ff997ac5e</string>
 </dict>
 </plist>

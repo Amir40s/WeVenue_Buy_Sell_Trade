@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB-tdkOp0sclBHsBFS-WizlED6b4hW9RE0',
-    appId: '1:997689278256:android:c3ba84e4f7ffa4845052f5',
-    messagingSenderId: '997689278256',
-    projectId: 'wevenue-aa298',
-    storageBucket: 'wevenue-aa298.firebasestorage.app',
+    apiKey: 'AIzaSyA_aET5Vxm0UEdAtfKRN0fGM8SwYM6wbv0',
+    appId: '1:859206399227:android:f6c05f47da1e719097ac5e',
+    messagingSenderId: '859206399227',
+    projectId: 'wevenue-buy-sell-trade',
+    storageBucket: 'wevenue-buy-sell-trade.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDkEzA7RAGXnOY1HmDSHlOln3orN5jQXgc',
-    appId: '1:997689278256:ios:eeda33257c131a575052f5',
-    messagingSenderId: '997689278256',
-    projectId: 'wevenue-aa298',
-    storageBucket: 'wevenue-aa298.firebasestorage.app',
+    apiKey: 'AIzaSyDqozfFJTt7DaLVItfwK4Ccer5EKf7rogw',
+    appId: '1:859206399227:ios:364ddbda0ba52ff997ac5e',
+    messagingSenderId: '859206399227',
+    projectId: 'wevenue-buy-sell-trade',
+    storageBucket: 'wevenue-buy-sell-trade.firebasestorage.app',
     iosBundleId: 'com.solinovation.biouwa',
   );
 
