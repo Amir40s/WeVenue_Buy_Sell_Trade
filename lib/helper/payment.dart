@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
+// import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,20 +31,20 @@ class PaymentController extends GetxController {
 
       payIntentId1 = savePayIntent(paymentIntent);
 
-      final gPay = const PaymentSheetGooglePay(
-        merchantCountryCode: "GB",
-        currencyCode: "GBP",
-        testEnv: true,
-      );
-
-      await Stripe.instance.initPaymentSheet(
-        paymentSheetParameters: SetupPaymentSheetParameters(
-          paymentIntentClientSecret: paymentIntent['client_secret'],
-          style: ThemeMode.light,
-          merchantDisplayName: 'Laundry Services',
-          googlePay: gPay,
-        ),
-      );
+      // final gPay = const PaymentSheetGooglePay(
+      //   merchantCountryCode: "GB",
+      //   currencyCode: "GBP",
+      //   testEnv: true,
+      // );
+      //
+      // await Stripe.instance.initPaymentSheet(
+      //   paymentSheetParameters: SetupPaymentSheetParameters(
+      //     paymentIntentClientSecret: paymentIntent['client_secret'],
+      //     style: ThemeMode.light,
+      //     merchantDisplayName: 'Laundry Services',
+      //     googlePay: gPay,
+      //   ),
+      // );
 
       await displayPaymentSheet(amount, onSuccess, successMsj);
     } catch (e) {
@@ -65,17 +65,16 @@ class PaymentController extends GetxController {
     String successMsj,
   ) async {
     try {
-      await Stripe.instance.presentPaymentSheet().then((_) {
-        onSuccess();
-        // AppUtils.showToast(message: '🎉 $successMsj');
-      });
+      // await Stripe.instance.presentPaymentSheet().then((_) {
+      //   onSuccess();
+      //   // AppUtils.showToast(message: '🎉 $successMsj');
+      // });
     } catch (e) {
       handlePaymentError(e);
     }
   }
 
-  Future<Map<String, dynamic>?> createPaymentIntent(
-      String amount, String currency) async {
+  Future<Map<String, dynamic>?> createPaymentIntent(String amount, String currency) async {
     try {
       int amountInCents = (double.parse(amount) * 100).toInt();
 
@@ -128,8 +127,7 @@ class PaymentController extends GetxController {
       if (response.statusCode == 200) {
         // AppUtils.showToast(message: '✅ Refund processed successfully.');
       } else {
-        throw Exception(
-            '⚠️ Refund could not be processed. Please contact support.');
+        throw Exception('⚠️ Refund could not be processed. Please contact support.');
       }
     } catch (e) {
       handlePaymentError(e);
@@ -139,15 +137,18 @@ class PaymentController extends GetxController {
   void handlePaymentError(dynamic error) {
     String errorMessage = "⚠️ Something went wrong. Please try again.";
 
-    if (error is StripeException) {
-      if (error.error.code == FailureCode.Canceled) {
-        errorMessage = "⚠️ Payment was canceled.";
-      } else if (error.error.message!.contains("authentication")) {
-        errorMessage = "⚠️ Payment authentication required.";
-      } else {
-        errorMessage = "⚠️ Payment failed: ${error.error.localizedMessage}";
-      }
-    } else if (error is http.ClientException) {
+    // if (
+    // // error is StripeException
+    // ) {
+    //   // if (error.error.code == FailureCode.Canceled) {
+    //   //   errorMessage = "⚠️ Payment was canceled.";
+    //   // } else if (error.error.message!.contains("authentication")) {
+    //   //   errorMessage = "⚠️ Payment authentication required.";
+    //   // } else {
+    //   //   errorMessage = "⚠️ Payment failed: ${error.error.localizedMessage}";
+    //   // }
+    // } else
+    if (error is http.ClientException) {
       errorMessage = "⚠️ Network error. Please check your internet connection.";
     } else if (error.toString().contains("Invalid amount")) {
       errorMessage = "⚠️ Please enter a valid amount.";
