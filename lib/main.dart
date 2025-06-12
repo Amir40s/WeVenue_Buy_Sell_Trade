@@ -25,13 +25,14 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  print("App INIT");
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  await dotenv.load(fileName: '.env');
-  // Stripe.publishableKey = dotenv.env['STRIPE_PUBLISH_KEY']!;
-  // await Stripe.instance.applySettings();
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+  // await dotenv.load(fileName: '.env');
+  // // Stripe.publishableKey = dotenv.env['STRIPE_PUBLISH_KEY']!;
+  // // await Stripe.instance.applySettings();
   runApp(const MyApp());
 }
 
