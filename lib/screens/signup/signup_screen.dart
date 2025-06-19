@@ -22,7 +22,6 @@ class SignupScreen extends StatelessWidget {
 
   var nameController = TextEditingController();
   var emailController = TextEditingController();
-  var phoneController = TextEditingController();
   var passwordController = TextEditingController();
   final ValueNotifier<bool> _obscurePassword = ValueNotifier<bool>(true);
   @override
@@ -75,16 +74,6 @@ class SignupScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  CustomTextField(
-                    hintText: "Phone",
-                    controller: phoneController,
-                    suffixPath: AppIcons.ic_phone,
-                    keyboardType: TextInputType.number,
-                    error: '${AppString.fieldError}Phone',
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
                   const CustomDropdown(),
                   const SizedBox(
                     height: 20.0,
@@ -113,8 +102,7 @@ class SignupScreen extends StatelessWidget {
                                           name: nameController.text.toString(),
                                           email:
                                               emailController.text.toString(),
-                                          phone:
-                                              phoneController.text.toString(),
+                                          phone:'',
                                           accountType: dropDownProvider
                                               .selectedAccountType
                                               .toString(),

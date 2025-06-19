@@ -46,7 +46,6 @@ class _AccountScreenState extends State<AccountScreen> {
 
     nameController = TextEditingController(text: accountProvider.name);
     emailController = TextEditingController(text: accountProvider.email);
-    phoneController = TextEditingController(text: accountProvider.phone);
     addressController = TextEditingController(text: accountProvider.address);
   }
 
@@ -54,7 +53,6 @@ class _AccountScreenState extends State<AccountScreen> {
   void dispose() {
     nameController.dispose();
     emailController.dispose();
-    phoneController.dispose();
     addressController.dispose();
     super.dispose();
   }
@@ -210,22 +208,8 @@ class _AccountScreenState extends State<AccountScreen> {
                             controller: emailController,
                           ),
 
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          TextWidget(
-                            text: "Phone",
-                            size: 14.0,
-                            isBold: true,
-                          ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          ReInputField(
-                            hintText: phoneController.text =
-                                accountProvider.phone.toString(),
-                            controller: phoneController,
-                          ),
+
+
 
                           const SizedBox(
                             height: 10.0,
