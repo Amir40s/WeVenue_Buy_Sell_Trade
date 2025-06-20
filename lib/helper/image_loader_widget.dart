@@ -17,11 +17,14 @@ class ImageLoaderWidget extends StatelessWidget {
           )
         : CachedNetworkImage(
             imageUrl: imageUrl,
-            placeholder: (context, url) => const CircularProgressIndicator(
-              color: primaryColor,
+            placeholder: (context, url) => SizedBox(
+              height: 50,
+              width: 50,
+              child: const CircularProgressIndicator(
+                color: primaryColor,
+              ),
             ),
-            errorWidget: (context, url, error) =>
-                Image.asset("assets/icons/ic_profile_image.webp"),
+            errorWidget: (context, url, error) => Image.asset("assets/icons/ic_profile_image.webp"),
             fit: BoxFit.cover,
           );
   }

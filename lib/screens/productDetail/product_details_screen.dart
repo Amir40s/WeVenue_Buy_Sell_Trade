@@ -138,27 +138,28 @@ class ProductDetailsBody extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                      flex: 3,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextWidget(
-                            text: product.title,
-                            size: 18.0,
-                            isBold: true,
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          TextWidget(
-                            text: "\$${product.cost}",
-                            size: 18.0,
-                            isBold: true,
-                            color: Colors.green,
-                          ),
-                        ],
-                      )),
+                    flex: 3,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextWidget(
+                          text: product.title,
+                          size: 18.0,
+                          isBold: true,
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        TextWidget(
+                          text: "\$${product.cost}",
+                          size: 18.0,
+                          isBold: true,
+                          color: Colors.green,
+                        ),
+                      ],
+                    ),
+                  ),
                   // GestureDetector(
                   //   onTap: bottomP.isLoggedIn
                   //       ? () async {

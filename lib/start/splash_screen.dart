@@ -16,11 +16,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 4), () {
-      if (auth.currentUser != null) {
-        Get.offAll(() => const BottomNavBar());
-      } else {
-        Get.offAll(LoginScreen());
-      }
+      Get.offAll(() => const BottomNavBar());
     });
     return Scaffold(
       backgroundColor: darkPurple,

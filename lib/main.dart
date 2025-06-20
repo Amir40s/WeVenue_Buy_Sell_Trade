@@ -18,7 +18,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -31,8 +31,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await dotenv.load(fileName: '.env');
-  // Stripe.publishableKey = dotenv.env['STRIPE_PUBLISH_KEY']!;
-  // await Stripe.instance.applySettings();
+  Stripe.publishableKey = dotenv.env['STRIPE_PUBLISH_KEY']!;
+  await Stripe.instance.applySettings();
   runApp(const MyApp());
 }
 

@@ -17,8 +17,7 @@ import '../../helper/simple_header.dart';
 import 'order_placed_screen.dart';
 
 class CheckoutScreen extends StatelessWidget {
-  CheckoutScreen(
-      {super.key, required this.totalProducts, required this.pPrice});
+  CheckoutScreen({super.key, required this.totalProducts, required this.pPrice});
 
   final String totalProducts;
   final String pPrice;
@@ -97,7 +96,6 @@ class CheckoutScreen extends StatelessWidget {
                     height: 50.0,
                     onClicked: () {
                       if (_formKey.currentState!.validate()) {
-                        log(checkoutP.price);
                         paymentC.makePayment(
                             amount: cartP.totalAmount.toStringAsFixed(2),
                             successMsj: '',
@@ -108,6 +106,7 @@ class CheckoutScreen extends StatelessWidget {
                                   userPhone: phoneController.text.trim(),
                                   totalAmount: pPrice,
                                   totalItems: totalProducts);
+                              cartP.clearCart();
                               Get.to(OrderPlacedScreen());
                             });
                       }
