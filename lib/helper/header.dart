@@ -1,6 +1,7 @@
 import 'package:biouwa/helper/images.dart';
 import 'package:biouwa/helper/text_widget.dart';
 import 'package:biouwa/provider/bottom_bar/bottom_bar_provider.dart';
+import 'package:biouwa/screens/favorites/favorites_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -65,13 +66,26 @@ class Header extends StatelessWidget {
                   ),
                 ]),
               ),
+              // const SizedBox(
+              //   width: 10.0,
+              // ),
+              // const Icon(
+              //   Icons.notifications,
+              //   color: Colors.black,
+              //   size: 26,
+              // ),
               const SizedBox(
                 width: 10.0,
               ),
-              const Icon(
-                Icons.notifications,
-                color: Colors.black,
-                size: 26,
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => const FavoritesScreen());
+                },
+                child: const Icon(
+                  Icons.favorite,
+                  color: Colors.black,
+                  size: 26,
+                ),
               ),
               // GestureDetector(
               //     onTap: menuPress,

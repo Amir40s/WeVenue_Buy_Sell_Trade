@@ -31,26 +31,32 @@ class ProductModel {
   });
 
   factory ProductModel.fromMap(Map<String, dynamic> data, String documentId) {
+    final rawCost = data['cost'] ?? data['price'];
+    final double parsedCost = (rawCost is num)
+        ? rawCost.toDouble()
+        : (double.tryParse(rawCost?.toString() ?? '0') ?? 0.0);
+
     return ProductModel(
       docID: documentId,
-      timestamp: data['timestamp'] ?? '',
-      cost: data['cost'].toDouble() ?? 0.0,
-      date: data['date'] ?? '',
-      description: data['description'] ?? '',
-      image: data['image'] ?? '',
-      time: data['time'] ?? '',
-      title: data['title'] ?? '',
-      userUID: data['userUID'] ?? '',
-      name: data['name'] ?? '',
-      profile: data['profile'] ?? '',
-      email: data['email'] ?? '',
-      isSaved: data['isSaved'] ?? false,
+      timestamp: data['timestamp']?.toString() ?? '',
+      cost: parsedCost,
+      date: data['date']?.toString() ?? '',
+      description: data['description']?.toString() ?? '',
+      image: data['image']?.toString() ?? '',
+      time: data['time']?.toString() ?? '',
+      title: (data['title'] ?? data['name'] ?? '').toString(),
+      userUID: data['userUID']?.toString() ?? '',
+      name: (data['name'] ?? data['title'] ?? '').toString(),
+      profile: data['profile']?.toString() ?? '',
+      email: data['email']?.toString() ?? '',
+      isSaved: data['isSaved'] == true,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': docID,
+      'docID': docID,
       'cost': cost,
       'date': date,
       'description': description,

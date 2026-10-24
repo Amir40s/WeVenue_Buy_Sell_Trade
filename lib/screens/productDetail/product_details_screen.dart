@@ -2,13 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:biouwa/helper/button_widget.dart';
-import 'package:biouwa/helper/image_loader_widget.dart';
 import 'package:biouwa/helper/simple_header.dart';
 import 'package:biouwa/helper/text_widget.dart';
-import 'package:biouwa/model/product/product_image_model.dart';
 import 'package:biouwa/model/product/product_model.dart';
 import 'package:biouwa/provider/bottom_bar/bottom_bar_provider.dart';
-import 'package:biouwa/screens/chat/chat_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,8 +14,6 @@ import 'package:provider/provider.dart';
 import '../../constant.dart';
 import '../../helper/bordder_button_widget.dart';
 import '../../provider/cart/cart_provider.dart';
-import '../../provider/chat/chat_provider.dart';
-import '../../provider/products/products_provider.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   final ProductModel product;
@@ -82,7 +77,8 @@ class ProductDetailsBody extends StatelessWidget {
                 height: Get.width * 0.600,
                 padding: const EdgeInsets.all(20.0),
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: NetworkImage(product.image), fit: BoxFit.cover),
+                  image: DecorationImage(
+                      image: NetworkImage(product.image), fit: BoxFit.cover),
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10.0),
                 ),
@@ -208,7 +204,9 @@ class ProductDetailsBody extends StatelessWidget {
                     Consumer<CartProvider>(
                       builder: (context, provider, child) {
                         return BorderButtonWidget(
-                          text: provider.isInCart(product) ? "Remove" : "Add to Cart",
+                          text: provider.isInCart(product)
+                              ? "Remove"
+                              : "Add to Cart",
                           width: Get.width * 0.4,
                           height: 50.0,
                           textColor: primaryColor,
@@ -216,11 +214,17 @@ class ProductDetailsBody extends StatelessWidget {
                           onClicked: () {
                             try {
                               if (provider.isInCart(product)) {
-                                showSnackBar(title: "Product Removed", subtitle: "");
-                                Provider.of<CartProvider>(context, listen: false).removeProduct(product);
+                                showSnackBar(
+                                    title: "Product Removed", subtitle: "");
+                                Provider.of<CartProvider>(context,
+                                        listen: false)
+                                    .removeProduct(product);
                               } else {
-                                showSnackBar(title: "Product Added", subtitle: "");
-                                Provider.of<CartProvider>(context, listen: false).addProduct(product);
+                                showSnackBar(
+                                    title: "Product Added", subtitle: "");
+                                Provider.of<CartProvider>(context,
+                                        listen: false)
+                                    .addProduct(product);
                               }
                             } catch (e) {
                               log("Add Cart Product Button : ${e.toString()}");
