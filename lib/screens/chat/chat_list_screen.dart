@@ -1,8 +1,6 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:biouwa/helper/no_user_widget.dart';
-import 'package:biouwa/helper/text_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/svg.dart';
@@ -22,35 +20,47 @@ class ChatListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bottomProvider = Provider.of<BottomBarProvider>(context);
+
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: const Color(0xFFF6F6FA),
       body: SafeArea(
         child: bottomProvider.isLoggedIn
-            ? Container(
-                margin: EdgeInsets.only(top: Get.width * 0.450),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Row(
-                        children: [
-                          TextWidget(
-                            text: "Messages",
-                            size: 16.0,
-                            isBold: true,
-                            color: primaryColor,
-                          ),
-                        ],
+            ? Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.fromLTRB(22, 24, 22, 30),
+                    decoration: const BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(28),
+                        bottomRight: Radius.circular(28),
                       ),
                     ),
-                    Consumer<ChatProvider>(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Messages',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          'Stay connected with your conversations',
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.8),
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Consumer<ChatProvider>(
                       builder: (context, chatProvider, _) {
                         return StreamBuilder<List<ChatRoomModel>>(
                           stream: chatProvider.getChatRoomsStream(),
@@ -60,110 +70,252 @@ class ChatListScreen extends StatelessWidget {
                               return Center(
                                 child: Platform.isIOS
                                     ? const CupertinoActivityIndicator()
-                                    : const CircularProgressIndicator(),
+                                    : const CircularProgressIndicator(
+                                        color: primaryColor,
+                                      ),
                               );
                             }
-                            if (!snapshot.hasData || snapshot.data!.isEmpty) {
+
+                            if (snapshot.hasError) {
                               return const Center(
-                                child: Text('No chats available'),
+                                child: Text('Unable to load conversations'),
                               );
                             }
-                            var chatRooms = snapshot.data!;
+
+                            if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                              return Center(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(22),
+                                      decoration: BoxDecoration(
+                                        color: primaryColor.withValues(
+                                            alpha: 0.08),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.chat_bubble_outline_rounded,
+                                        size: 42,
+                                        color: primaryColor,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
+                                    const Text(
+                                      'No conversations yet',
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xFF202033),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 6),
+                                    const Text(
+                                      'Your messages will appear here.',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Color(0xFF85859A),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+
+                            final chatRooms = snapshot.data!;
+
                             return ListView.separated(
-                              itemCount: snapshot.data!.length,
-                              shrinkWrap: true,
+                              padding:
+                                  const EdgeInsets.fromLTRB(16, 22, 16, 24),
+                              itemCount: chatRooms.length,
+                              separatorBuilder: (_, __) =>
+                                  const SizedBox(height: 12),
                               itemBuilder: (context, index) {
                                 final chatRoom = chatRooms[index];
-                                final unreadCount = chatProvider
-                                        .unreadMessageCounts[chatRoom.id] ??
-                                    0;
-                                var otherUserEmail = chatRoom.users.firstWhere(
-                                    (user) => user != auth.currentUser!.email);
-                                var lastMessage = chatRoom.lastMessage;
+                                final currentEmail = auth.currentUser?.email;
 
-                                log("message $unreadCount");
-
-                                log(
-                                  "message ${chatProvider.users.firstWhere(
-                                    (user) => user.email == otherUserEmail,
-                                    orElse: () => UserModel(
-                                        id: '',
-                                        name: 'Unknown',
-                                        email: otherUserEmail,
-                                        image: ''),
-                                  )}",
+                                final otherUserEmail =
+                                    chatRoom.users.firstWhere(
+                                  (user) => user != currentEmail,
+                                  orElse: () => '',
                                 );
 
-                                // Retrieve user information from ChatProvider
-                                var otherUser = chatProvider.users.firstWhere(
+                                final otherUser = chatProvider.users.firstWhere(
                                   (user) => user.email == otherUserEmail,
                                   orElse: () => UserModel(
                                     id: '',
                                     name: 'Unknown',
                                     email: otherUserEmail,
                                     image: '',
-                                  ), // Default user
-                                );
-
-                                log("message ${otherUser.image}");
-                                return ListTile(
-                                  leading: otherUser.image.isNotEmpty &&
-                                          otherUser.image != ''
-                                      ? CircleAvatar(
-                                          backgroundImage:
-                                              NetworkImage(otherUser.image),
-                                        )
-                                      : const CircleAvatar(
-                                          child: Center(
-                                            child: Icon(Icons.person),
-                                          ),
-                                        ),
-                                  title: TextWidget(
-                                      text: otherUser.name,
-                                      size: 14.0,
-                                      color: Colors.black,
-                                      isBold: true),
-                                  // title: Text(otherUserEmail),
-                                  subtitle: TextWidget(
-                                    text: lastMessage.toString(),
-                                    size: 12.0,
-                                    color: Colors.black,
                                   ),
-                                  trailing: chatRoom.isMessage ==
-                                              auth.currentUser!.email &&
-                                          chatRoom.isMessage != "seen"
-                                      ? const CircleAvatar(
-                                          radius: 7,
-                                          backgroundColor: primaryColor,
-                                        )
-                                      : null,
-                                  onTap: () async {
-                                    final chatRoomId = await context
-                                        .read<ChatProvider>()
-                                        .createOrGetChatRoom(
-                                            otherUser.email, "");
-                                    Provider.of<ChatProvider>(context,
-                                            listen: false)
-                                        .updateMessageStatus(chatRoomId);
-                                    Get.to(ChatScreen(
-                                      userUID: "product.userUID",
-                                      name: otherUser.name,
-                                      image: otherUser.image,
-                                      otherEmail: otherUser.email,
-                                      chatRoomId: chatRoomId,
-                                    ));
-                                    await chatProvider
-                                        .getUnreadMessageCount(chatRoom.id);
-                                    log("message ${chatProvider.getUnreadMessageCount(chatRoom.id).toString()}");
-
-                                    // await chatProvider.getCollectionLength(chatRoom.id);
-                                    // log('get Messages ${chatProvider.collectionLength}');
-                                  },
                                 );
-                              },
-                              separatorBuilder: (context, index) {
-                                return const Divider(
-                                  color: Colors.black,
+
+                                final unreadCount = chatProvider
+                                        .unreadMessageCounts[chatRoom.id] ??
+                                    0;
+
+                                final lastMessage =
+                                    chatRoom.lastMessage.toString();
+
+                                final hasUnread = unreadCount > 0 ||
+                                    (chatRoom.isMessage == currentEmail &&
+                                        chatRoom.isMessage != 'seen');
+
+                                return Material(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(18),
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(18),
+                                    onTap: () async {
+                                      final chatRoomId = await context
+                                          .read<ChatProvider>()
+                                          .createOrGetChatRoom(
+                                            otherUser.email,
+                                            '',
+                                          );
+
+                                      if (!context.mounted) return;
+
+                                      context
+                                          .read<ChatProvider>()
+                                          .updateMessageStatus(chatRoomId);
+
+                                      Get.to(
+                                        () => ChatScreen(
+                                          userUID: otherUser.id,
+                                          name: otherUser.name,
+                                          image: otherUser.image,
+                                          otherEmail: otherUser.email,
+                                          chatRoomId: chatRoomId,
+                                        ),
+                                      );
+
+                                      await chatProvider
+                                          .getUnreadMessageCount(chatRoom.id);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(14),
+                                      child: Row(
+                                        children: [
+                                          Stack(
+                                            children: [
+                                              CircleAvatar(
+                                                radius: 27,
+                                                backgroundColor: primaryColor
+                                                    .withValues(alpha: 0.1),
+                                                backgroundImage:
+                                                    otherUser.image.isNotEmpty
+                                                        ? NetworkImage(
+                                                            otherUser.image)
+                                                        : null,
+                                                child: otherUser.image.isEmpty
+                                                    ? const Icon(
+                                                        Icons.person_rounded,
+                                                        color: primaryColor,
+                                                        size: 28,
+                                                      )
+                                                    : null,
+                                              ),
+                                              Positioned(
+                                                right: 0,
+                                                bottom: 0,
+                                                child: Container(
+                                                  width: 12,
+                                                  height: 12,
+                                                  decoration: BoxDecoration(
+                                                    color: hasUnread
+                                                        ? primaryColor
+                                                        : const Color(
+                                                            0xFFB8B8C5),
+                                                    shape: BoxShape.circle,
+                                                    border: Border.all(
+                                                      color: Colors.white,
+                                                      width: 2,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(width: 13),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  otherUser.name.isNotEmpty
+                                                      ? otherUser.name
+                                                      : otherUser.email,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: const TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Color(0xFF202033),
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 6),
+                                                Text(
+                                                  lastMessage.isNotEmpty
+                                                      ? lastMessage
+                                                      : 'Start a conversation',
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: hasUnread
+                                                        ? const Color(
+                                                            0xFF45455A)
+                                                        : const Color(
+                                                            0xFF85859A),
+                                                    fontWeight: hasUnread
+                                                        ? FontWeight.w600
+                                                        : FontWeight.normal,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(width: 8),
+                                          if (unreadCount > 0)
+                                            Container(
+                                              constraints: const BoxConstraints(
+                                                minWidth: 22,
+                                                minHeight: 22,
+                                              ),
+                                              alignment: Alignment.center,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 6,
+                                              ),
+                                              decoration: const BoxDecoration(
+                                                color: primaryColor,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Text(
+                                                unreadCount > 99
+                                                    ? '99+'
+                                                    : '$unreadCount',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            )
+                                          else
+                                            const Icon(
+                                              Icons.chevron_right_rounded,
+                                              color: Color(0xFFB0B0BF),
+                                              size: 22,
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 );
                               },
                             );
@@ -171,42 +323,11 @@ class ChatListScreen extends StatelessWidget {
                         );
                       },
                     ),
-                  ],
-                ),
+                  ),
+                ],
               )
             : const NoUserWidget(title: 'Required Login'),
       ),
-    );
-  }
-}
-
-class CurrentlyUnavailable extends StatelessWidget {
-  const CurrentlyUnavailable({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // SvgPicture.asset(
-        //   Images.noData,
-        //   height: Get.height * 0.35,
-        // ),
-        const SizedBox(height: 24),
-        TextWidget(
-          text: 'Currently unavailable',
-          size: 18,
-          isBold: true,
-        ),
-        const SizedBox(height: 8),
-        TextWidget(
-          text:
-              'It looks like you’re not logged in or don’t have an account yet.',
-          size: 14,
-          color: Colors.grey,
-          textAlignment: TextAlign.center,
-        ),
-        SizedBox(height: Get.height * 0.05)
-      ],
     );
   }
 }

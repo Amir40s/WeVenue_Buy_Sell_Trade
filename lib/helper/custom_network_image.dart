@@ -24,10 +24,22 @@ class CustomNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final calculatedIconSize =
+        iconSize != null && iconSize!.isFinite && iconSize! > 0
+            ? iconSize!
+            : height.isFinite && height > 0
+                ? (height / 3.5).clamp(16.0, 48.0).toDouble()
+                : 40.0;
+
     return ClipRRect(
       borderRadius: borderRadius ?? BorderRadius.circular(20),
       child: isAssetsImage
-          ? Image.asset(imageUrl, height: height, width: width, fit: fit)
+          ? Image.asset(
+              imageUrl,
+              height: height,
+              width: width,
+              fit: fit,
+            )
           : CachedNetworkImage(
               imageUrl: imageUrl,
               height: height,
@@ -46,10 +58,11 @@ class CustomNetworkImage extends StatelessWidget {
                 height: height,
                 width: width,
                 color: Colors.grey.shade200,
+                alignment: Alignment.center,
                 child: Icon(
                   Icons.broken_image,
                   color: Colors.grey,
-                  size: iconSize ?? height / 3.5,
+                  size: calculatedIconSize,
                 ),
               ),
             ),

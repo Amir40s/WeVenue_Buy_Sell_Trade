@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../../constant.dart';
 import '../../helper/images.dart';
 import '../../provider/bottom_bar/bottom_bar_provider.dart';
 import '../uploadItems/items_upload_screen.dart';
@@ -19,22 +19,128 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   final double defaultIconSize = 20.0;
 
+  static const Color navBackground = Color(0xFF171923);
+  static const Color activeColor = Color(0xFFFFFFFF);
+  static const Color inactiveColor = Color(0xFF9296A5);
+  static const Color scaffoldBackground = Color(0xFFF5F6FA);
+
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<BottomBarProvider>(context, listen: false).refreshStatus();
-    });
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      Provider.of<BottomBarProvider>(
+        context,
+        listen: false,
+      ).refreshStatus();
+    });
+  }
+
+  Widget _navItem({
+    required String label,
+    required Widget icon,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    final color = isSelected ? activeColor : inactiveColor;
+
+    return Expanded(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: SizedBox(
+          height: 56,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconTheme(
+                data: IconThemeData(color: color, size: defaultIconSize),
+                child: icon,
+              ),
+              const SizedBox(height: 5),
+              Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 9.5,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                  color: color,
+                  letterSpacing: 0.3,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _assetNavItem({
+    required String label,
+    required String asset,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    final color = isSelected ? activeColor : inactiveColor;
+
+    return _navItem(
+      label: label,
+      isSelected: isSelected,
+      onTap: onTap,
+      icon: Image.asset(
+        asset,
+        height: defaultIconSize,
+        width: defaultIconSize,
+        color: color,
+      ),
+    );
+  }
+
+  Widget _publishLabel() {
+    return const Text(
+      'PUBLISH',
+      style: TextStyle(
+        fontSize: 9.5,
+        fontWeight: FontWeight.w500,
+        color: inactiveColor,
+        letterSpacing: 0.3,
+      ),
+    );
+  }
+
+  Widget _publishItem(VoidCallback onTap) {
+    return Expanded(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: SizedBox(
+          height: 56,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.public_rounded,
+                size: defaultIconSize,
+                color: inactiveColor,
+              ),
+              const SizedBox(height: 5),
+              const _PublishLabelPlaceholder(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    var bottomBarProvider =
-    Provider.of<BottomBarProvider>(context, listen: false);
+    final bottomBarProvider =
+        Provider.of<BottomBarProvider>(context, listen: false);
 
-    return Platform.isAndroid
-        ? Scaffold(
-      backgroundColor: lightGrey,
+    return Scaffold(
+      backgroundColor: scaffoldBackground,
       resizeToAvoidBottomInset: false,
       body: Consumer<BottomBarProvider>(
         builder: (context, value, child) {
@@ -42,303 +148,85 @@ class _BottomNavBarState extends State<BottomNavBar> {
         },
       ),
       bottomNavigationBar: BottomAppBar(
+        height: 66,
+        padding: const EdgeInsets.symmetric(horizontal: 5),
         shape: const CircularNotchedRectangle(),
-        notchMargin: 0.5,
-        color: darkGrey,
+        notchMargin: 7,
+        color: navBackground,
         surfaceTintColor: Colors.transparent,
+        elevation: 12,
         child: Consumer<BottomBarProvider>(
           builder: (context, value, child) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    bottomBarProvider.changeMyIndex(0);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        AppIcons.ic_home,
-                        height: defaultIconSize,
-                        color: value.myIndex == 0
-                            ? Colors.white
-                            : Colors.grey,
-                      ),
-                      const SizedBox(height: 5.0),
-                      Text(
-                        "HOME",
-                        style: TextStyle(
-                          fontSize: 10.0,
-                          color: value.myIndex == 0
-                              ? Colors.white
-                              : Colors.grey,
+            if (Platform.isAndroid) {
+              return Row(
+                children: [
+                  _assetNavItem(
+                    label: 'HOME',
+                    asset: AppIcons.ic_home,
+                    isSelected: value.myIndex == 0,
+                    onTap: () => bottomBarProvider.changeMyIndex(0),
+                  ),
+                  _assetNavItem(
+                    label: 'CHATS',
+                    asset: AppIcons.ic_chat,
+                    isSelected: value.myIndex == 1,
+                    onTap: () => bottomBarProvider.changeMyIndex(1),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => bottomBarProvider.changeMyIndex(2),
+                      child: SizedBox(
+                        height: 56,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height: defaultIconSize),
+                            const SizedBox(height: 5),
+                            const _PublishLabelPlaceholder(),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                // SizedBox(width: Get.width*0.125,),
-                GestureDetector(
-                  onTap: () {
-                    bottomBarProvider.changeMyIndex(1);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        AppIcons.ic_chat,
-                        height: defaultIconSize,
-                        color: value.myIndex == 1
-                            ? Colors.white
-                            : Colors.grey,
-                      ),
-                      const SizedBox(height: 5.0),
-                      Text(
-                        "CHATS",
-                        style: TextStyle(
-                          fontSize: 10.0,
-                          color: value.myIndex == 1
-                              ? Colors.white
-                              : Colors.grey,
-                        ),
-                      ),
-                    ],
+                  _assetNavItem(
+                    label: 'RELOCATION',
+                    asset: AppIcons.ic_relocation,
+                    isSelected: value.myIndex == 2,
+                    onTap: () => bottomBarProvider.changeMyIndex(2),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    bottomBarProvider.changeMyIndex(2);
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Icon(null),
-                      SizedBox(height: Get.width * 0.010),
-                      // SizedBox(height: Get.width * 0.010),
-                      SizedBox(width: Get.width * 0.010),
-                      const Text(
-                        "PUBLISH",
-                        style: TextStyle(
-                          fontSize: 10.0,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
+                  _assetNavItem(
+                    label: 'ACCOUNT',
+                    asset: AppIcons.ic_person,
+                    isSelected: value.myIndex == 3,
+                    onTap: () => bottomBarProvider.changeMyIndex(3),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    bottomBarProvider.changeMyIndex(2);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        AppIcons.ic_relocation,
-                        height: defaultIconSize,
-                        color: value.myIndex == 2
-                            ? Colors.white
-                            : Colors.grey,
-                      ),
-                      const SizedBox(height: 5.0),
-                      Text(
-                        "RELOCATION",
-                        style: TextStyle(
-                          fontSize: 10.0,
-                          color: value.myIndex == 2
-                              ? Colors.white
-                              : Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    bottomBarProvider.changeMyIndex(3);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        AppIcons.ic_person,
-                        height: defaultIconSize,
-                        color: value.myIndex == 3
-                            ? Colors.white
-                            : Colors.grey,
-                      ),
-                      const SizedBox(height: 5.0),
-                      Text(
-                        "Account",
-                        style: TextStyle(
-                          fontSize: 10.0,
-                          color: value.myIndex == 3
-                              ? Colors.white
-                              : Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-      floatingActionButtonLocation:
-      FloatingActionButtonLocation.miniCenterDocked,
-      floatingActionButton: Consumer<BottomBarProvider>(
-        builder: (context, value, child) {
-          return FloatingActionButton.large(
-            backgroundColor: Colors.transparent,
-            focusElevation: 0.0,
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            highlightElevation: 0.0,
-            disabledElevation: 0.0,
-            elevation: 0.0,
-            onPressed: () {
-              Get.to(() => ItemsUploadScreen());
-            },
-            child: Image.asset(
-              AppIcons.ic_add,
-              height: 200.0,
-            ),
-          );
-        },
-      ),
-    )
-        : Scaffold(
-      backgroundColor: lightGrey,
-      resizeToAvoidBottomInset: false,
-      body: Consumer<BottomBarProvider>(
-        builder: (context, value, child) {
-          return value.myList[value.myIndex];
-        },
-      ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 0.5,
-        color: darkGrey,
-        surfaceTintColor: Colors.transparent,
-        child: Consumer<BottomBarProvider>(
-          builder: (context, value, child) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    bottomBarProvider.changeMyIndex(0);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        AppIcons.ic_home,
-                        height: defaultIconSize,
-                        color: value.myIndex == 0
-                            ? Colors.white
-                            : Colors.grey,
-                      ),
-                      const SizedBox(height: 5.0),
-                      Text(
-                        "HOME",
-                        style: TextStyle(
-                          fontSize: 10.0,
-                          color: value.myIndex == 0
-                              ? Colors.white
-                              : Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // SizedBox(width: Get.width*0.125,),
+                ],
+              );
+            }
 
-                GestureDetector(
-                  onTap: () {
-                    bottomBarProvider.changeMyIndex(1);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.public,
-                        color: value.myIndex == 1
-                            ? Colors.white
-                            : Colors.grey,
-                      ),
-                      SizedBox(height: Get.width * 0.010),
-                      // SizedBox(height: Get.width * 0.010),
-                      SizedBox(width: Get.width * 0.010),
-                      const Text(
-                        "PUBLISH",
-                        style: TextStyle(
-                          fontSize: 10.0,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
+            return Row(
+              children: [
+                _assetNavItem(
+                  label: 'HOME',
+                  asset: AppIcons.ic_home,
+                  isSelected: value.myIndex == 0,
+                  onTap: () => bottomBarProvider.changeMyIndex(0),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    bottomBarProvider.changeMyIndex(3);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        AppIcons.ic_relocation,
-                        height: defaultIconSize,
-                        color: value.myIndex == 3
-                            ? Colors.white
-                            : Colors.grey,
-                      ),
-                      const SizedBox(height: 5.0),
-                      Text(
-                        "RELOCATION",
-                        style: TextStyle(
-                          fontSize: 10.0,
-                          color: value.myIndex == 3
-                              ? Colors.white
-                              : Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
+                _publishItem(
+                  () => bottomBarProvider.changeMyIndex(1),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    bottomBarProvider.changeMyIndex(4);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        AppIcons.ic_person,
-                        height: defaultIconSize,
-                        color: value.myIndex == 4
-                            ? Colors.white
-                            : Colors.grey,
-                      ),
-                      const SizedBox(height: 5.0),
-                      Text(
-                        "Account",
-                        style: TextStyle(
-                          fontSize: 10.0,
-                          color: value.myIndex == 4
-                              ? Colors.white
-                              : Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
+                _assetNavItem(
+                  label: 'RELOCATION',
+                  asset: AppIcons.ic_relocation,
+                  isSelected: value.myIndex == 3,
+                  onTap: () => bottomBarProvider.changeMyIndex(3),
+                ),
+                _assetNavItem(
+                  label: 'ACCOUNT',
+                  asset: AppIcons.ic_person,
+                  isSelected: value.myIndex == 4,
+                  onTap: () => bottomBarProvider.changeMyIndex(4),
                 ),
               ],
             );
@@ -346,27 +234,45 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
       ),
       floatingActionButtonLocation:
-      FloatingActionButtonLocation.miniCenterDocked,
-      // floatingActionButton: Consumer<BottomBarProvider>(
-      //   builder: (context, value, child) {
-      //     return FloatingActionButton.large(
-      //       backgroundColor: Colors.transparent,
-      //       focusElevation: 0.0,
-      //       splashColor: Colors.transparent,
-      //       focusColor: Colors.transparent,
-      //       highlightElevation: 0.0,
-      //       disabledElevation: 0.0,
-      //       elevation: 0.0,
-      //       onPressed: () {
-      //         Get.to(() => ItemsUploadScreen());
-      //       },
-      //       child: Image.asset(
-      //         AppIcons.ic_add,
-      //         height: 200.0,
-      //       ),
-      //     );
-      //   },
-      // ),
+          FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButton: Platform.isAndroid
+          ? FloatingActionButton(
+              onPressed: () => Get.to(() => ItemsUploadScreen()),
+              backgroundColor: Colors.transparent,
+              foregroundColor: Colors.transparent,
+              elevation: 0,
+              focusElevation: 0,
+              highlightElevation: 0,
+              disabledElevation: 0,
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              shape: const CircleBorder(),
+              child: SvgPicture.asset(
+                'assets/icons/publish_add.svg',
+                width: 58,
+                height: 58,
+              ),
+            )
+          : null,
+    );
+  }
+}
+
+class _PublishLabelPlaceholder extends StatelessWidget {
+  const _PublishLabelPlaceholder();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'PUBLISH',
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: 9.5,
+        fontWeight: FontWeight.w500,
+        color: Color(0xFF9296A5),
+        letterSpacing: 0.3,
+      ),
     );
   }
 }

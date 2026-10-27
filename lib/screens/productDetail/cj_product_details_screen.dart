@@ -620,56 +620,27 @@ class _CJProductDetailsScreenState extends State<CJProductDetailsScreen> {
           ),
           const SizedBox(width: 18),
           Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: SizedBox(
-                    height: 50,
-                    child: OutlinedButton(
-                      onPressed: () => _addToCart(navigateToCart: false),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: darkPurple,
-                        side: const BorderSide(color: darkPurple, width: 1.5),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                      child: const Text(
-                        'Add to Cart',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+            child: SizedBox(
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () => _addToCart(navigateToCart: true),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: darkPurple,
+                  foregroundColor: Colors.white,
+                  elevation: 3,
+                  shadowColor: darkPurple.withValues(alpha: 0.4),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
                   ),
                 ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: SizedBox(
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () => _addToCart(navigateToCart: true),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: darkPurple,
-                        foregroundColor: Colors.white,
-                        elevation: 3,
-                        shadowColor: darkPurple.withValues(alpha: 0.4),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                      child: const Text(
-                        'Buy Now',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                child: const Text(
+                  'Buy Now',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ],
